@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://res.cloudinary.com/dzwwok8fj/image/upload/v1755418057/app_logo_bw3a90.jpg" alt="SecretSpace Logo" cursor="none" width="100"/>
+  <img src="/public/secretspace_app_logo.jpg" alt="SecretSpace Logo" cursor="none" width="100"/>
 </p>
 
 <h1 align="center">SecretSpace - Anonymous Confessions & Self-Destructing Messages</h1>
