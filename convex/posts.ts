@@ -79,21 +79,21 @@ export const getFeedPosts = query({
     const postsWithInfo = await Promise.all(
       posts.map(async (post) => {
         // Handle null userId for anonymous posts
-        const postAuthor = post.userId 
-          ? await ctx.db.get(post.userId)
-          : null;
+        const postAuthor = post.userId ? await ctx.db.get(post.userId) : null;
 
         return {
           ...post,
-          author: postAuthor ? {
-            _id: postAuthor?._id,
-            username: postAuthor?.username,
-            image: postAuthor?.image,
-          } : {
-            _id: null,
-            username: "Anonymous",
-            image: null,
-          },
+          author: postAuthor
+            ? {
+                _id: postAuthor?._id,
+                username: postAuthor?.username,
+                image: postAuthor?.image,
+              }
+            : {
+                _id: null,
+                username: "Anonymous",
+                image: null,
+              },
         };
       })
     );
@@ -437,7 +437,7 @@ export const getFeedPostsByDate = query({
 
         // Fetch user for posts with a valid userId
         const postAuthor = await ctx.db.get(post.userId);
-        
+
         // Additional null check for postAuthor
         if (!postAuthor) {
           return {
@@ -517,7 +517,7 @@ export const getFeedPostsByLikes = query({
 
         // Fetch user for posts with a valid userId
         const postAuthor = await ctx.db.get(post.userId);
-        
+
         // Additional null check for postAuthor
         if (!postAuthor) {
           return {
@@ -582,21 +582,21 @@ export const getFeedPostsByComments = query({
     const postsWithInfo = await Promise.all(
       posts.map(async (post) => {
         // Handle null userId for anonymous posts
-        const postAuthor = post.userId 
-          ? await ctx.db.get(post.userId)
-          : null;
+        const postAuthor = post.userId ? await ctx.db.get(post.userId) : null;
 
         return {
           ...post,
-          author: postAuthor ? {
-            _id: postAuthor?._id,
-            username: postAuthor?.username,
-            image: postAuthor?.image,
-          } : {
-            _id: null,
-            username: "Anonymous",
-            image: null,
-          },
+          author: postAuthor
+            ? {
+                _id: postAuthor?._id,
+                username: postAuthor?.username,
+                image: postAuthor?.image,
+              }
+            : {
+                _id: null,
+                username: "Anonymous",
+                image: null,
+              },
         };
       })
     );

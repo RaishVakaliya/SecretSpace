@@ -46,13 +46,13 @@ export const createSecretMessage = mutation({
             // Extract first and last name from fullname if available
             let firstName = "";
             let lastName = "";
-            
+
             if (recipient.fullname) {
               const nameParts = recipient.fullname.split(" ");
               firstName = nameParts[0] || "";
               lastName = nameParts.slice(1).join(" ") || "";
             }
-            
+
             await ctx.scheduler.runAfter(
               0,
               internal.sendNotification.sendSecretMessageNotification,

@@ -1,6 +1,6 @@
 import { ConvexError, v } from "convex/values";
 import { mutation, query } from "./_generated/server";
-import { getAuthenticatedUser } from './users';
+import { getAuthenticatedUser } from "./users";
 
 export const addComment = mutation({
   args: {
@@ -21,7 +21,7 @@ export const addComment = mutation({
     if (!post) throw new ConvexError("Post not found");
 
     // Insert the comment
-    const commentId = await ctx.db.insert('comments', {
+    const commentId = await ctx.db.insert("comments", {
       userId: userId, // This can be null for anonymous comments
       postId: args.postId,
       content: args.content,

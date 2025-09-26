@@ -96,12 +96,11 @@ export async function getAuthenticatedUser(ctx: QueryCtx | MutationCtx) {
 }
 
 export const getUserByClerkId = query({
-  args: { clerkId: v.string() },
-  handler: async (ctx, args) => {
+  handler: async (ctx, { clerkId }: { clerkId: string }) => {
     const user = await ctx.db
       .query("users")
-      .withIndex("by_clerk_id", (q) => q.eq("clerkId", args.clerkId))
-      .unique();
+      .withIndex("by_clerk_id", (q) => q.eq("clerkId", clerkId))
+      .first();
 
     return user;
   },

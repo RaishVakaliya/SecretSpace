@@ -161,26 +161,34 @@ const ProfilePage = () => {
                 <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">
                   {user?.fullname}
                 </h2>
-                <p className="text-gray-400 text-sm sm:text-base break-all">{user?.email}</p>
+                <p className="text-gray-400 text-sm sm:text-base break-all">
+                  {user?.email}
+                </p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-8">
                 <div className="bg-gray-700 rounded-lg p-3 sm:p-4">
                   <div className="text-xl sm:text-2xl font-bold text-[#79a7d6] mb-1">
                     Member Since
                   </div>
-                  <div className="text-gray-300 text-sm sm:text-base">{memberSince}</div>
+                  <div className="text-gray-300 text-sm sm:text-base">
+                    {memberSince}
+                  </div>
                 </div>
                 <div className="bg-gray-700 rounded-lg p-3 sm:p-4">
                   <div className="text-xl sm:text-2xl font-bold text-[#79a7d6] mb-1">
                     {user?.posts}
                   </div>
-                  <div className="text-gray-300 text-sm sm:text-base">Confessions Sent</div>
+                  <div className="text-gray-300 text-sm sm:text-base">
+                    Confessions Sent
+                  </div>
                 </div>
                 <div className="bg-gray-700 rounded-lg p-3 sm:p-4">
                   <div className="text-xl sm:text-2xl font-bold text-[#79a7d6] mb-1">
                     {secretMessagesCount}
                   </div>
-                  <div className="text-gray-300 text-sm sm:text-base">Secret Messages</div>
+                  <div className="text-gray-300 text-sm sm:text-base">
+                    Secret Messages
+                  </div>
                 </div>
               </div>
 
@@ -274,7 +282,10 @@ const ProfilePage = () => {
              duration-300 hover:from-[#be123c] hover:to-[#fb7185]"
                       onClick={() => handleDeleteClick(post._id)}
                     >
-                      <svg viewBox="0 0 15 15" className="w-4 sm:w-5 fill-white">
+                      <svg
+                        viewBox="0 0 15 15"
+                        className="w-4 sm:w-5 fill-white"
+                      >
                         <svg
                           className="w-4 h-4 sm:w-6 sm:h-6"
                           stroke="currentColor"

@@ -30,7 +30,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const syncUser = async () => {
       setError(null);
-      
+
       if (!isSignedIn || !userId || !isClerkUserLoaded || !clerkUser) {
         setUser(null);
         setIsLoading(false);
@@ -62,7 +62,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
               // ignore signOut failures here
             }
           }
-          
+
           setUser(null);
           setIsLoading(false);
           return;
@@ -72,14 +72,24 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         setUser(convexUser);
       } catch (error) {
         console.error("Error syncing user:", error);
-        setError(error instanceof Error ? error.message : "Failed to sync user");
+        setError(
+          error instanceof Error ? error.message : "Failed to sync user"
+        );
       } finally {
         setIsLoading(false);
       }
     };
 
     syncUser();
-  }, [isSignedIn, userId, convexUser, createUser, clerkUser, isClerkUserLoaded, user]);
+  }, [
+    isSignedIn,
+    userId,
+    convexUser,
+    createUser,
+    clerkUser,
+    isClerkUserLoaded,
+    user,
+  ]);
 
   return (
     <UserContext.Provider value={{ user, isLoading, error }}>
