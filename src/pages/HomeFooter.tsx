@@ -9,6 +9,10 @@ import { useNavigate } from "react-router-dom";
 
 const HomeFooter = () => {
   const navigate = useNavigate();
+  const currentYear = new Date().getFullYear();
+  const currentDay = new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+  });
   return (
     <footer className="w-full bg-gray-800 border-t border-gray-700 pt-8">
       <div className="max-w-7xl mx-auto px-6">
@@ -110,19 +114,19 @@ const HomeFooter = () => {
           <div>
             <h4 className="text-white font-semibold mb-4">Connect</h4>
             <div className="flex space-x-4">
-              <button className="text-gray-400 hover:text-purple-400 text-xl">
+              <button className="text-gray-400 hover:text-[#1da1f2] text-xl">
                 <FaTwitter />
               </button>
-              <button className="text-gray-400 hover:text-purple-400 text-xl">
+              <button className="text-gray-400 hover:text-[#e1306c] text-xl">
                 <FaInstagram />
               </button>
-              <button className="text-gray-400 hover:text-purple-400 text-xl">
+              <button className="text-gray-400 hover:text-[#5865f2] text-xl">
                 <FaDiscord />
               </button>
-              <button className="text-gray-400 hover:text-purple-400 text-xl">
+              <button className="text-gray-400 hover:text-[#f0f0f0] text-xl">
                 <FaGithub />
               </button>
-              <button className="text-gray-400 hover:text-purple-400 text-xl">
+              <button className="text-gray-400 hover:text-[#0088cc] text-xl">
                 <FaTelegram />
               </button>
             </div>
@@ -132,7 +136,7 @@ const HomeFooter = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-3 sm:gap-x-6 sm:gap-y-2 text-gray-400 text-xs sm:text-sm">
               <span className="text-center sm:text-left">
-                © 2025 SecretSpace. All rights reserved.
+                © {currentYear} SecretSpace. All rights reserved.
               </span>
               <div className="flex flex-wrap justify-center gap-3 sm:gap-6">
                 <button
@@ -162,6 +166,9 @@ const HomeFooter = () => {
                   Contact
                 </button>
               </div>
+            </div>
+            <div className="text-center text-gray-400 text-xs sm:text-sm mt-3">
+              Have a good {currentDay}! ❤️
             </div>
           </div>
         </div>

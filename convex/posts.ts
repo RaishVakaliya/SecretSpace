@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { mutation, query } from "./_generated/server"; // Ensure this path is correct
+import { mutation, query } from "./_generated/server";
 import { getAuthenticatedUser } from "./users";
 
 export const generateUploadUrl = mutation(async (ctx) => {
@@ -25,7 +25,7 @@ export const createPost = mutation({
       userId: currentUser._id,
       imageUrl,
       storageId: args.storageId,
-      text: args.text, // Include text field
+      text: args.text,
       likes: 0,
       comments: 0,
     });
@@ -41,7 +41,6 @@ export const createPost = mutation({
 
 export const getFeedPosts = query({
   handler: async (ctx) => {
-    // Get current user if authenticated
     let currentUserId = null;
     try {
       const identity = await ctx.auth.getUserIdentity();
@@ -55,20 +54,18 @@ export const getFeedPosts = query({
         }
       }
     } catch (error) {
-      // If there's an error or user is not authenticated, continue without filtering
       console.error("Error getting current user:", error);
     }
 
-    // Get all posts, excluding the current user's if authenticated
     let postsQuery = ctx.db.query("posts").order("desc");
 
     // Filter out current user's posts if authenticated
     if (currentUserId) {
       postsQuery = postsQuery.filter((q) =>
         q.or(
-          q.eq(q.field("userId"), null), // Include anonymous posts
-          q.neq(q.field("userId"), currentUserId) // Exclude current user's posts
-        )
+          q.eq(q.field("userId"), null),
+          q.neq(q.field("userId"), currentUserId),
+        ),
       );
     }
 
@@ -95,7 +92,7 @@ export const getFeedPosts = query({
                 image: null,
               },
         };
-      })
+      }),
     );
 
     return postsWithInfo;
@@ -110,7 +107,7 @@ export const toggleLike = mutation({
     const existing = await ctx.db
       .query("likes")
       .withIndex("by_user_and_post", (q) =>
-        q.eq("userId", currentUser._id).eq("postId", args.postId)
+        q.eq("userId", currentUser._id).eq("postId", args.postId),
       )
       .first();
 
@@ -122,7 +119,7 @@ export const toggleLike = mutation({
       await ctx.db.delete(existing._id);
       await ctx.db.patch(args.postId, { likes: post.likes - 1 });
 
-      return false; // Unliked
+      return false;
     } else {
       // Add Like
       await ctx.db.insert("likes", {
@@ -132,7 +129,7 @@ export const toggleLike = mutation({
 
       await ctx.db.patch(args.postId, { likes: post.likes + 1 });
 
-      return true; // Liked
+      return true;
     }
   },
 });
@@ -245,17 +242,14 @@ export const createTextPost = mutation({
   handler: async (ctx, args) => {
     const currentUser = await getAuthenticatedUser(ctx);
 
-    // Create post with text only (no image)
     const postId = await ctx.db.insert("posts", {
       userId: currentUser._id,
       text: args.text,
-      imageUrl: "", // Empty string for no image
-      // Remove the storageId field entirely instead of setting it to null
+      imageUrl: "",
       likes: 0,
       comments: 0,
     });
 
-    // Increment number of posts count by 1
     await ctx.db.patch(currentUser._id, {
       posts: currentUser.posts + 1,
     });
@@ -270,11 +264,10 @@ export const createAnonymousTextPost = mutation({
     text: v.string(),
   },
   handler: async (ctx, args) => {
-    // Create post with text only (no image) and no user ID
     const postId = await ctx.db.insert("posts", {
-      userId: null, // No user ID for anonymous posts
+      userId: null,
       text: args.text,
-      imageUrl: "", // Empty string for no image
+      imageUrl: "",
       likes: 0,
       comments: 0,
     });
@@ -293,9 +286,8 @@ export const createAnonymousPost = mutation({
     const imageUrl = await ctx.storage.getUrl(args.storageId);
     if (!imageUrl) throw new Error("Image not found");
 
-    // Create post with image and optional text, but no user ID
     const postId = await ctx.db.insert("posts", {
-      userId: null, // No user ID for anonymous posts
+      userId: null,
       imageUrl,
       storageId: args.storageId,
       text: args.text,
@@ -312,22 +304,19 @@ export const generateAnonymousUploadUrl = mutation(async (ctx) => {
   return await ctx.storage.generateUploadUrl();
 });
 
-// Add this new function after the other query functions
-// Modify this function to handle missing users
 export const getUserPosts = query({
   handler: async (ctx) => {
     try {
       const identity = await ctx.auth.getUserIdentity();
-      if (!identity) return []; // Return empty array if not authenticated
+      if (!identity) return [];
 
       const user = await ctx.db
         .query("users")
         .withIndex("by_clerk_id", (q) => q.eq("clerkId", identity.subject))
         .first();
 
-      if (!user) return []; // Return empty array if user not found
+      if (!user) return [];
 
-      // Get all posts by the current user
       const posts = await ctx.db
         .query("posts")
         .withIndex("by_user", (q) => q.eq("userId", user._id))
@@ -337,38 +326,36 @@ export const getUserPosts = query({
       return posts;
     } catch (error) {
       console.error("Error in getUserPosts:", error);
-      return []; // Return empty array on error
+      return [];
     }
   },
 });
 
-// Add this function to check if the current user has liked a post
 export const hasUserLikedPost = query({
   args: { postId: v.id("posts") },
   handler: async (ctx, args) => {
     try {
       const identity = await ctx.auth.getUserIdentity();
-      if (!identity) return false; // Not authenticated
+      if (!identity) return false;
 
       const user = await ctx.db
         .query("users")
         .withIndex("by_clerk_id", (q) => q.eq("clerkId", identity.subject))
         .first();
 
-      if (!user) return false; // User not found
+      if (!user) return false;
 
-      // Check if the user has liked this post
       const like = await ctx.db
         .query("likes")
         .withIndex("by_user_and_post", (q) =>
-          q.eq("userId", user._id).eq("postId", args.postId)
+          q.eq("userId", user._id).eq("postId", args.postId),
         )
         .first();
 
-      return !!like; // Return true if like exists, false otherwise
+      return !!like;
     } catch (error) {
       console.error("Error in hasUserLikedPost:", error);
-      return false; // Return false on error
+      return false;
     }
   },
 });
@@ -386,7 +373,6 @@ export const getPostLikeCount = query({
 // Add these new query functions for different sorting options
 export const getFeedPostsByDate = query({
   handler: async (ctx) => {
-    // Get current user if authenticated (same as in getFeedPosts)
     let currentUserId = null;
     try {
       const identity = await ctx.auth.getUserIdentity();
@@ -403,17 +389,14 @@ export const getFeedPostsByDate = query({
       console.error("Error getting current user:", error);
     }
 
-    // Get all posts, excluding the current user's if authenticated
-    // Sort by creation time (newest first)
     let postsQuery = ctx.db.query("posts").order("desc");
 
-    // Filter out current user's posts if authenticated
     if (currentUserId) {
       postsQuery = postsQuery.filter((q) =>
         q.or(
-          q.eq(q.field("userId"), null), // Include anonymous posts
-          q.neq(q.field("userId"), currentUserId) // Exclude current user's posts
-        )
+          q.eq(q.field("userId"), null),
+          q.neq(q.field("userId"), currentUserId),
+        ),
       );
     }
 
@@ -423,7 +406,6 @@ export const getFeedPostsByDate = query({
     // Enhance posts with user data
     const postsWithInfo = await Promise.all(
       posts.map(async (post) => {
-        // Safely handle posts with null or undefined userId
         if (!post.userId) {
           return {
             ...post,
@@ -438,7 +420,6 @@ export const getFeedPostsByDate = query({
         // Fetch user for posts with a valid userId
         const postAuthor = await ctx.db.get(post.userId);
 
-        // Additional null check for postAuthor
         if (!postAuthor) {
           return {
             ...post,
@@ -458,7 +439,7 @@ export const getFeedPostsByDate = query({
             image: postAuthor.image ?? null,
           },
         };
-      })
+      }),
     );
 
     return postsWithInfo;
@@ -467,7 +448,6 @@ export const getFeedPostsByDate = query({
 
 export const getFeedPostsByLikes = query({
   handler: async (ctx) => {
-    // Get current user if authenticated
     let currentUserId = null;
     try {
       const identity = await ctx.auth.getUserIdentity();
@@ -491,19 +471,17 @@ export const getFeedPostsByLikes = query({
     if (currentUserId) {
       postsQuery = postsQuery.filter((q) =>
         q.or(
-          q.eq(q.field("userId"), null), // Include anonymous posts
-          q.neq(q.field("userId"), currentUserId) // Exclude current user's posts
-        )
+          q.eq(q.field("userId"), null),
+          q.neq(q.field("userId"), currentUserId),
+        ),
       );
     }
 
     const posts = await postsQuery.collect();
     if (posts.length === 0) return [];
 
-    // Enhance posts with user data
     const postsWithInfo = await Promise.all(
       posts.map(async (post) => {
-        // Safely handle posts with null or undefined userId
         if (!post.userId) {
           return {
             ...post,
@@ -538,10 +516,9 @@ export const getFeedPostsByLikes = query({
             image: postAuthor.image ?? null,
           },
         };
-      })
+      }),
     );
 
-    // Sort by likes (most likes first)
     return postsWithInfo.sort((a, b) => b.likes - a.likes);
   },
 });
@@ -568,10 +545,9 @@ export const getFeedPostsByComments = query({
     // Get all posts
     let postsQuery = ctx.db.query("posts");
 
-    // Filter out current user's posts if authenticated
     if (currentUserId) {
       postsQuery = postsQuery.filter((q) =>
-        q.neq(q.field("userId"), currentUserId)
+        q.neq(q.field("userId"), currentUserId),
       );
     }
 
@@ -581,7 +557,6 @@ export const getFeedPostsByComments = query({
     // Enhance posts with user data
     const postsWithInfo = await Promise.all(
       posts.map(async (post) => {
-        // Handle null userId for anonymous posts
         const postAuthor = post.userId ? await ctx.db.get(post.userId) : null;
 
         return {
@@ -598,10 +573,9 @@ export const getFeedPostsByComments = query({
                 image: null,
               },
         };
-      })
+      }),
     );
 
-    // Sort by comments (most comments first)
     return postsWithInfo.sort((a, b) => b.comments - a.comments);
   },
 });

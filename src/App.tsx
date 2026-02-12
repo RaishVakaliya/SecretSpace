@@ -28,10 +28,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Landing Page Route - No NavBar */}
         <Route path="/" element={<LandingPage />} />
 
-        {/* Main App Routes with NavBar */}
         <Route
           path="/*"
           element={
@@ -39,7 +37,6 @@ function App() {
               <NavBar />
               <main className="pt-20 flex-grow">
                 {" "}
-                {/* Adjusted padding for horizontal navbar */}
                 <Routes>
                   <Route path="home" element={<HomePage />} />
                   <Route path="confessions" element={<ConfessionsPage />} />
@@ -84,7 +81,6 @@ function App() {
                   />
                   <Route path="/report-issues" element={<ReportIssuesPage />} />
 
-                  {/* Catch all other routes and redirect to home */}
                   <Route path="*" element={<Navigate to="/home" replace />} />
                 </Routes>
               </main>

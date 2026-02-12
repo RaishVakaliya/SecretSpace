@@ -8,7 +8,6 @@ export const addComment = mutation({
     postId: v.id("posts"),
   },
   handler: async (ctx, args) => {
-    // Get the current user (or null for anonymous comments)
     let userId = null;
     try {
       const currentUser = await getAuthenticatedUser(ctx);
@@ -20,14 +19,12 @@ export const addComment = mutation({
     const post = await ctx.db.get(args.postId);
     if (!post) throw new ConvexError("Post not found");
 
-    // Insert the comment
     const commentId = await ctx.db.insert("comments", {
-      userId: userId, // This can be null for anonymous comments
+      userId: userId,
       postId: args.postId,
       content: args.content,
     });
 
-    // Increment comment count by 1
     await ctx.db.patch(args.postId, {
       comments: post.comments + 1,
     });
@@ -45,13 +42,11 @@ export const getComments = query({
       .order("desc")
       .collect();
 
-    // Get the post to identify the creator
     const post = await ctx.db.get(args.postId);
     const postCreatorId = post?.userId;
 
     const commentsWithInfo = await Promise.all(
       comments.map(async (comment) => {
-        // If userId is null, it's an anonymous comment
         if (!comment.userId) {
           return {
             ...comment,
@@ -63,21 +58,19 @@ export const getComments = query({
           };
         }
 
-        // Check if this comment is from the post creator
         const isPostCreator = comment.userId === postCreatorId;
 
-        // Otherwise, get the user info
         const user = await ctx.db.get(comment.userId);
         return {
           ...comment,
-          userId: comment.userId, // Include the userId in the returned data
+          userId: comment.userId,
           user: {
             fullname: user?.fullname || "Anonymous",
             image: user?.image,
           },
           isPostCreator,
         };
-      })
+      }),
     );
 
     return commentsWithInfo;

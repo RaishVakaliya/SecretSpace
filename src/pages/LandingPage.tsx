@@ -20,6 +20,10 @@ const LandingPage: React.FC = () => {
   const navigate = useNavigate();
   const [showVideo, setShowVideo] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const currentYear = new Date().getFullYear();
+  const currentDay = new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+  });
 
   const LandingPage = () => (
     <div className="min-h-screen bg-black">
@@ -136,14 +140,14 @@ const LandingPage: React.FC = () => {
           backgroundPosition: "center",
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-black via-purple-900 to-black opacity-80"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-600 via-green-900 to-black opacity-80"></div>
         <div className="absolute inset-0 bg-black bg-opacity-30"></div>
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
           <div className="mb-8">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
               Your{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#9fab1b] via-[#42f5ce] to-pink-700">
                 Secret
               </span>{" "}
               Space
@@ -191,28 +195,22 @@ const LandingPage: React.FC = () => {
 
           {/* Floating Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div className="bg-white bg-opacity-5 backdrop-blur-sm rounded-xl p-6 border border-purple-400 border-opacity-30">
-              <div className="text-3xl font-bold text-purple-400 mb-2">
-                10K+
-              </div>
+            <div className="bg-white bg-opacity-5 backdrop-blur-sm rounded-xl p-6 border border-[#058fab] border-opacity-30">
+              <div className="text-3xl font-bold text-[#058fab] mb-2">10K+</div>
               <div className="text-gray-300 text-sm">Trusted Users</div>
             </div>
-            <div className="bg-white bg-opacity-5 backdrop-blur-sm rounded-xl p-6 border border-purple-400 border-opacity-30">
-              <div className="text-3xl font-bold text-purple-400 mb-2">
-                50K+
-              </div>
+            <div className="bg-white bg-opacity-5 backdrop-blur-sm rounded-xl p-6 border border-[#058fab] border-opacity-30">
+              <div className="text-3xl font-bold text-[#058fab] mb-2">50K+</div>
               <div className="text-gray-300 text-sm">Secrets Shared</div>
             </div>
-            <div className="bg-white bg-opacity-5 backdrop-blur-sm rounded-xl p-6 border border-purple-400 border-opacity-30">
-              <div className="text-3xl font-bold text-purple-400 mb-2">
+            <div className="bg-white bg-opacity-5 backdrop-blur-sm rounded-xl p-6 border border-[#058fab] border-opacity-30">
+              <div className="text-3xl font-bold text-[#058fab] mb-2">
                 100K+
               </div>
               <div className="text-gray-300 text-sm">Connections Made</div>
             </div>
-            <div className="bg-white bg-opacity-5 backdrop-blur-sm rounded-xl p-6 border border-purple-400 border-opacity-30">
-              <div className="text-3xl font-bold text-purple-400 mb-2">
-                24/7
-              </div>
+            <div className="bg-white bg-opacity-5 backdrop-blur-sm rounded-xl p-6 border border-[#058fab] border-opacity-30">
+              <div className="text-3xl font-bold text-[#058fab] mb-2">24/7</div>
               <div className="text-gray-300 text-sm">Always Secure</div>
             </div>
           </div>
@@ -228,7 +226,7 @@ const LandingPage: React.FC = () => {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Built for{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#42f5ce] via-pink-700 to-[#9fab1b]">
                 Privacy
               </span>
             </h2>
@@ -240,8 +238,8 @@ const LandingPage: React.FC = () => {
 
           <div className="grid md:grid-cols-3 gap-10">
             <div className="group">
-              <div className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-2xl border border-gray-800 hover:border-purple-400 transition-all duration-300 transform hover:-translate-y-2">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <div className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-2xl border border-gray-800 hover:border-[#058fab] transition-all duration-300 transform hover:-translate-y-2">
+                <div className="w-16 h-16 bg-gradient-to-br from-pink-700 to-[#9fab1b] rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <FaShieldAlt className="fas fa-shield-alt text-white  text-2xl" />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4">
@@ -255,8 +253,8 @@ const LandingPage: React.FC = () => {
             </div>
 
             <div className="group">
-              <div className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-2xl border border-gray-800 hover:border-purple-400 transition-all duration-300 transform hover:-translate-y-2">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <div className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-2xl border border-gray-800 hover:border-[#058fab] transition-all duration-300 transform hover:-translate-y-2">
+                <div className="w-16 h-16 bg-gradient-to-br from-pink-700 to-[#9fab1b] rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <FaUserSecret className="text-white text-2xl" />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4">
@@ -271,8 +269,8 @@ const LandingPage: React.FC = () => {
             </div>
 
             <div className="group">
-              <div className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-2xl border border-gray-800 hover:border-purple-400 transition-all duration-300 transform hover:-translate-y-2">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <div className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-2xl border border-gray-800 hover:border-[#058fab] transition-all duration-300 transform hover:-translate-y-2">
+                <div className="w-16 h-16 bg-gradient-to-br from-pink-700 to-[#9fab1b] rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <FaHeart className="fas fa-heart text-white  text-2xl" />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4">
@@ -298,14 +296,14 @@ const LandingPage: React.FC = () => {
             <div>
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
                 Why{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-700 via-[#9fab1b] to-[#42f5ce]">
                   SecretSpace
                 </span>
                 ?
               </h2>
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                  <div className="w-8 h-8 bg-[#058fab] rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
                     <FaCheck className="text-white text-xl" />
                   </div>
                   <div>
@@ -319,7 +317,7 @@ const LandingPage: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                  <div className="w-8 h-8 bg-[#058fab] rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
                     <FaCheck className="text-white text-xl" />
                   </div>
                   <div>
@@ -333,7 +331,7 @@ const LandingPage: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                  <div className="w-8 h-8 bg-[#058fab] rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
                     <FaCheck className="text-white text-xl" />
                   </div>
                   <div>
@@ -349,7 +347,7 @@ const LandingPage: React.FC = () => {
               </div>
             </div>
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl transform rotate-6"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-pink-700 to-[#9fab1b] rounded-2xl transform rotate-6"></div>
               <img
                 src="https://readdy.ai/api/search-image?query=modern%20smartphone%20displaying%20a%20secure%20messaging%20interface%20with%20dark%20theme%2C%20privacy%20icons%20and%20encryption%20symbols%2C%20clean%20minimal%20design%2C%20professional%20product%20photography%20with%20soft%20lighting%20on%20dark%20background&width=600&height=400&seq=about001&orientation=landscape"
                 alt="SecretSpace App Interface"
@@ -361,7 +359,7 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-r from-purple-900 via-black to-pink-900">
+      <section className="py-24 bg-gradient-to-r from-[#e3469aa1] via-[#42f5ce77] to-[#9fab1b90]">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Ready to Share Your Truth?
@@ -376,7 +374,7 @@ const LandingPage: React.FC = () => {
               onClick={() => navigate("/home")}
               style={{
                 backgroundImage:
-                  "linear-gradient(50deg, #1900f5, #7c09a3, #a40675)",
+                  "linear-gradient(144deg, #9fab1b, #42f5ce, #c026d3)",
               }}
             >
               <svg
@@ -479,19 +477,19 @@ const LandingPage: React.FC = () => {
               <div>
                 <h4 className="text-white font-semibold mb-3">Connect</h4>
                 <div className="flex space-x-4">
-                  <button className="text-gray-400 hover:text-purple-400 text-xl">
+                  <button className="text-gray-400 hover:text-[#1da1f2] text-xl">
                     <FaTwitter />
                   </button>
-                  <button className="text-gray-400 hover:text-purple-400 text-xl">
+                  <button className="text-gray-400 hover:text-[#e1306c] text-xl">
                     <FaInstagram />
                   </button>
-                  <button className="text-gray-400 hover:text-purple-400 text-xl">
+                  <button className="text-gray-400 hover:text-[#5865f2] text-xl">
                     <FaDiscord />
                   </button>
-                  <button className="text-gray-400 hover:text-purple-400 text-xl">
+                  <button className="text-gray-400 hover:text-[#f0f0f0] text-xl">
                     <FaGithub />
                   </button>
-                  <button className="text-gray-400 hover:text-purple-400 text-xl">
+                  <button className="text-gray-400 hover:text-[#0088cc] text-xl">
                     <FaTelegram />
                   </button>
                 </div>
@@ -500,9 +498,12 @@ const LandingPage: React.FC = () => {
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center">
             <p className="text-gray-400 text-sm">
-              © 2025 SecretSpace. All rights reserved. Your secrets are safe
-              with us.
+              © {currentYear} SecretSpace. All rights reserved. Your secrets
+              are safe with us.
             </p>
+          </div>
+          <div className="text-center text-gray-400 text-xs sm:text-sm mt-3">
+            Have a good {currentDay}! ❤️
           </div>
         </div>
       </footer>

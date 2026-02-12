@@ -46,7 +46,7 @@ const HomePage = () => {
                     className="relative inline-block p-px font-semibold leading-6 text-white bg-gray-800 shadow-2xl cursor-pointer rounded-xl shadow-zinc-900 transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
                     onClick={() => navigate("/confessions")}
                   >
-                    <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-teal-400 via-blue-500 to-purple-500 p-[2px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
+                    <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-teal-400 via-blue-500 to-teal-400 p-[2px] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
 
                     <span className="relative z-10 block px-6 py-3 rounded-xl bg-gray-950">
                       <div className="relative z-10 flex items-center space-x-2">
@@ -106,25 +106,25 @@ const HomePage = () => {
             <div className="bg-gray-800 rounded-xl p-8 border border-gray-700">
               <div className="grid md:grid-cols-4 gap-8 text-center">
                 <div>
-                  <div className="text-3xl font-bold text-[#79a7d6] mb-2">
+                  <div className="text-3xl font-bold text-[#058fab] mb-2">
                     10K+
                   </div>
                   <div className="text-gray-300">Active Users</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-[#79a7d6] mb-2">
+                  <div className="text-3xl font-bold text-[#058fab] mb-2">
                     50K+
                   </div>
                   <div className="text-gray-300">Confessions Shared</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-[#79a7d6] mb-2">
+                  <div className="text-3xl font-bold text-[#058fab] mb-2">
                     100K+
                   </div>
                   <div className="text-gray-300">Messages Sent</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-[#79a7d6] mb-2">
+                  <div className="text-3xl font-bold text-[#058fab] mb-2">
                     99.9%
                   </div>
                   <div className="text-gray-300">Privacy Protected</div>

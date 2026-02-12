@@ -108,11 +108,9 @@ export const getUserByClerkId = query({
 
 export const deleteAccount = mutation({
   handler: async (ctx) => {
-    // Get the authenticated user
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) throw new Error("Unauthorized");
 
-    // Find the user in the database
     const user = await ctx.db
       .query("users")
       .withIndex("by_clerk_id", (q) => q.eq("clerkId", identity.subject))
@@ -126,9 +124,7 @@ export const deleteAccount = mutation({
       .withIndex("by_user", (q) => q.eq("userId", user._id))
       .collect();
 
-    // Delete associated storage files, likes, and comments for each post
     for (const post of userPosts) {
-      // Delete associated likes
       const likes = await ctx.db
         .query("likes")
         .withIndex("by_post", (q) => q.eq("postId", post._id))
@@ -184,7 +180,6 @@ export const deleteAccount = mutation({
   },
 });
 
-// Search users by email
 export const searchUsersByEmail = query({
   args: { searchQuery: v.string() },
   handler: async (ctx, args) => {
@@ -196,17 +191,15 @@ export const searchUsersByEmail = query({
       .filter(
         (q) =>
           q.gt(q.field("email"), args.searchQuery) &&
-          q.lt(q.field("email"), args.searchQuery + "\uffff")
+          q.lt(q.field("email"), args.searchQuery + "\uffff"),
       )
       .collect();
 
-    // Return only necessary fields for security and exclude current user
-    // Also exclude users who have set searchable to false
     return users
       .filter(
         (user) =>
           user.email !== currentUser.email &&
-          (user.searchable === undefined || user.searchable === true)
+          (user.searchable === undefined || user.searchable === true),
       )
       .map((user) => ({
         _id: user._id,
@@ -218,7 +211,6 @@ export const searchUsersByEmail = query({
   },
 });
 
-// Update the updateUser mutation to include privacy settings
 export const updateUser = mutation({
   args: {
     fullname: v.string(),
@@ -238,7 +230,6 @@ export const updateUser = mutation({
 
     if (!user) throw new Error("User not found");
 
-    // Update the user profile with privacy settings
     await ctx.db.patch(user._id, {
       fullname: args.fullname,
       username: args.username,
@@ -258,7 +249,6 @@ export const updateEmailSettings = mutation({
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) throw new Error("Unauthorized");
 
-    // Find the user in the database
     const user = await ctx.db
       .query("users")
       .withIndex("by_clerk_id", (q) => q.eq("clerkId", identity.subject))
@@ -280,11 +270,9 @@ export const updatePrivacySettings = mutation({
     searchable: v.boolean(),
   },
   handler: async (ctx, args) => {
-    // Get the authenticated user
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) throw new Error("Unauthorized");
 
-    // Find the user in the database
     const user = await ctx.db
       .query("users")
       .withIndex("by_clerk_id", (q) => q.eq("clerkId", identity.subject))
@@ -292,7 +280,6 @@ export const updatePrivacySettings = mutation({
 
     if (!user) throw new Error("User not found");
 
-    // Update only the privacy settings
     await ctx.db.patch(user._id, {
       searchable: args.searchable,
     });

@@ -82,7 +82,7 @@ const ProfilePage = () => {
 
   // Format the date when the user was created
   const memberSince = new Date(
-    clerkUser?.createdAt || Date.now()
+    clerkUser?.createdAt || Date.now(),
   ).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -132,7 +132,7 @@ const ProfilePage = () => {
         {/* Profile Card */}
         <div className="bg-gray-800 rounded-xl p-4 sm:p-8 border border-gray-700 mb-8">
           <div className="flex flex-col items-center">
-            <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden mb-6 border-4 border-[#79a7d6]">
+            <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden mb-6 border-2 border-[#058fab]">
               {user?.image ? (
                 <img
                   src={user.image}
@@ -167,7 +167,7 @@ const ProfilePage = () => {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-8">
                 <div className="bg-gray-700 rounded-lg p-3 sm:p-4">
-                  <div className="text-xl sm:text-2xl font-bold text-[#79a7d6] mb-1">
+                  <div className="text-xl sm:text-2xl font-bold text-[#058fab] mb-1">
                     Member Since
                   </div>
                   <div className="text-gray-300 text-sm sm:text-base">
@@ -175,7 +175,7 @@ const ProfilePage = () => {
                   </div>
                 </div>
                 <div className="bg-gray-700 rounded-lg p-3 sm:p-4">
-                  <div className="text-xl sm:text-2xl font-bold text-[#79a7d6] mb-1">
+                  <div className="text-xl sm:text-2xl font-bold text-[#058fab] mb-1">
                     {user?.posts}
                   </div>
                   <div className="text-gray-300 text-sm sm:text-base">
@@ -183,7 +183,7 @@ const ProfilePage = () => {
                   </div>
                 </div>
                 <div className="bg-gray-700 rounded-lg p-3 sm:p-4">
-                  <div className="text-xl sm:text-2xl font-bold text-[#79a7d6] mb-1">
+                  <div className="text-xl sm:text-2xl font-bold text-[#058fab] mb-1">
                     {secretMessagesCount}
                   </div>
                   <div className="text-gray-300 text-sm sm:text-base">

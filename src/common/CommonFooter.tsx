@@ -2,12 +2,16 @@ import { useNavigate } from "react-router-dom";
 
 const CommonFooter = () => {
   const navigate = useNavigate();
+  const currentYear = new Date().getFullYear();
+  const currentDay = new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+  });
   return (
     <footer className="bg-gray-800 border-t border-gray-700 py-6 sm:py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-3 sm:gap-x-6 sm:gap-y-2 text-gray-400 text-xs sm:text-sm">
           <span className="text-center sm:text-left">
-            © 2025 SecretSpace. All rights reserved.
+            © {currentYear} SecretSpace. All rights reserved.
           </span>
           <div className="flex flex-wrap justify-center gap-3 sm:gap-6">
             <button
@@ -35,6 +39,9 @@ const CommonFooter = () => {
               Contact
             </button>
           </div>
+        </div>
+        <div className="text-center text-gray-400 text-xs sm:text-sm mt-3">
+          Have a good {currentDay}! ❤️
         </div>
       </div>
     </footer>

@@ -1,7 +1,6 @@
 import { Resend } from "resend";
 import { internalAction } from "./_generated/server";
 
-// Initialize Resend with the API key from environment variables
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const sendSecretMessageNotification = internalAction({
@@ -9,22 +8,19 @@ export const sendSecretMessageNotification = internalAction({
     ctx,
     {
       toEmail,
-      firstName = "", // Recipient's first name
-      lastName = "", // Recipient's last name
-      profileImage = "", // Recipient's profile image URL
+      firstName = "",
+      lastName = "",
+      profileImage = "",
     }: {
       toEmail: string;
       firstName?: string;
       lastName?: string;
       profileImage?: string;
-    }
+    },
   ) => {
-    // Track retry attempts
     const maxRetries = 3;
     let currentAttempt = 0;
     let lastError: any = null;
-
-    // Create a greeting using the recipient's name
     const fullName =
       firstName && lastName
         ? `${firstName} ${lastName}`
@@ -126,7 +122,6 @@ export const sendSecretMessageNotification = internalAction({
                 `,
         });
 
-        // Fix the TypeScript error by accessing the id correctly
         console.log("Email sent successfully", { id: data?.data?.id });
         console.log("ctx auth", ctx.auth);
 
@@ -147,10 +142,9 @@ export const sendSecretMessageNotification = internalAction({
         ) {
           currentAttempt++;
           await new Promise((resolve) =>
-            setTimeout(resolve, 1000 * Math.pow(2, currentAttempt))
+            setTimeout(resolve, 1000 * Math.pow(2, currentAttempt)),
           );
         } else {
-          // Don't retry for other types of errors
           break;
         }
       }

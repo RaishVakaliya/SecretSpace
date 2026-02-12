@@ -24,10 +24,8 @@ http.route({
     const payload = await request.text();
 
     try {
-      // Parse the event data
       const event = JSON.parse(payload);
 
-      // Log the email event
       console.log("Resend webhook event", {
         type: event.type,
         emailId: event.data?.id,

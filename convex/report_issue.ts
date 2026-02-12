@@ -1,12 +1,10 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
-// Generate upload URL for screenshots in issue reports
 export const generateUploadUrl = mutation(async (ctx) => {
   return await ctx.storage.generateUploadUrl();
 });
 
-// Submit issue report
 export const submitIssueReport = mutation({
   args: {
     issueType: v.string(),
@@ -15,7 +13,6 @@ export const submitIssueReport = mutation({
     storageId: v.optional(v.id("_storage")),
   },
   handler: async (ctx, args) => {
-    // Try to get authenticated user if available
     let userId = undefined;
     try {
       const identity = await ctx.auth.getUserIdentity();
@@ -29,18 +26,15 @@ export const submitIssueReport = mutation({
         }
       }
     } catch (error) {
-      // Continue without user ID if not authenticated
       console.error("Error getting current user:", error);
     }
 
-    // Get screenshot URL if storageId is provided
     let screenshotUrl = undefined;
     if (args.storageId) {
       const url = await ctx.storage.getUrl(args.storageId);
-      screenshotUrl = url ?? undefined; // Convert null to undefined
+      screenshotUrl = url ?? undefined;
     }
 
-    // Create issue report entry
     const reportId = await ctx.db.insert("report_issues", {
       issueType: args.issueType,
       description: args.description,
@@ -55,7 +49,6 @@ export const submitIssueReport = mutation({
   },
 });
 
-// Get all issue reports (for admin purposes)
 export const getAllIssueReports = query({
   handler: async (ctx) => {
     return await ctx.db.query("report_issues").order("desc").collect();
