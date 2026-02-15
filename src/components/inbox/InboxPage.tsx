@@ -25,7 +25,7 @@ const InboxPage = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setRefreshTrigger((prev) => prev + 1);
-    }, 60000); // 1 minute
+    }, 60000);
 
     return () => clearInterval(interval);
   }, []);
@@ -61,8 +61,8 @@ const InboxPage = () => {
       setTimeLeft(newTimeLeft);
     };
 
-    calculateTimeLeft(); // Run once on load
-    const timer = setInterval(calculateTimeLeft, 1000); // Update every second
+    calculateTimeLeft();
+    const timer = setInterval(calculateTimeLeft, 1000);
 
     return () => clearInterval(timer);
   }, [inboxMessages, refreshTrigger]);
@@ -70,7 +70,7 @@ const InboxPage = () => {
   const formatExpiryTime = (timestamp: number) => {
     const date = new Date(timestamp);
     return date.toLocaleString("en-GB", {
-      hour12: false, // Use 24-hour format
+      hour12: false,
       year: "numeric",
       month: "numeric",
       day: "numeric",
@@ -80,7 +80,6 @@ const InboxPage = () => {
   };
 
   const viewMessage = (uuid: string) => {
-    // Simply navigate to the message - email-based decryption will happen there
     navigate(`/secret-messages/${uuid}`);
   };
 

@@ -18,13 +18,12 @@ const CreateConfession = () => {
   const createPost = useMutation(api.posts.createPost);
   const createTextPost = useMutation(api.posts.createTextPost);
 
-  // Anonymous mutations
   const generateAnonymousUploadUrl = useMutation(
-    api.posts.generateAnonymousUploadUrl
+    api.posts.generateAnonymousUploadUrl,
   );
   const createAnonymousPost = useMutation(api.posts.createAnonymousPost);
   const createAnonymousTextPost = useMutation(
-    api.posts.createAnonymousTextPost
+    api.posts.createAnonymousTextPost,
   );
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -33,14 +32,12 @@ const CreateConfession = () => {
     const file = e.target.files?.[0];
     if (file) {
       setImage(file);
-      // Create a preview URL
       const url = URL.createObjectURL(file);
       setPreviewUrl(url);
     }
   };
 
   const handleImageButtonClick = () => {
-    // Trigger the hidden file input
     fileInputRef.current?.click();
   };
 
@@ -58,7 +55,6 @@ const CreateConfession = () => {
       setIsSubmitting(true);
 
       if (image) {
-        // Handle image upload - use appropriate function based on auth status
         const uploadUrl = user
           ? await generateUploadUrl()
           : await generateAnonymousUploadUrl();
@@ -77,7 +73,6 @@ const CreateConfession = () => {
         // Get the storage ID from the upload response
         const { storageId } = await result.json();
 
-        // Create the post with the image - use appropriate function based on auth status
         if (user) {
           await createPost({
             storageId,
@@ -90,7 +85,6 @@ const CreateConfession = () => {
           });
         }
       } else {
-        // Text-only confession - use appropriate function based on auth status
         if (user) {
           await createTextPost({
             text,
@@ -158,7 +152,7 @@ const CreateConfession = () => {
             onChange={(e) => setText(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Enter" && !e.shiftKey && (text.trim() || image)) {
-                e.preventDefault(); // prevent newline
+                e.preventDefault();
                 handleSubmit(e);
               }
             }}

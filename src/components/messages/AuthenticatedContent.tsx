@@ -8,7 +8,7 @@ import SecretLinkDisplay from "./SecretLinkDisplay";
 
 const AuthenticatedContent = () => {
   const [message, setMessage] = useState("");
-  const [expirationHours, setExpirationHours] = useState(1440); // 24 hours in minutes
+  const [expirationHours, setExpirationHours] = useState(1440);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showLink, setShowLink] = useState(false);
   const [secretLink, setSecretLink] = useState("");
@@ -27,12 +27,10 @@ const AuthenticatedContent = () => {
       searchQuery: searchQuery.length > 2 ? searchQuery : "",
     }) || [];
 
-  // Update search results visibility when query changes
   useEffect(() => {
     setShowSearchResults(searchQuery.length > 2);
   }, [searchQuery]);
 
-  // Close search results when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -68,10 +66,8 @@ const AuthenticatedContent = () => {
     try {
       setIsSubmitting(true);
 
-      // Generate a UUID for the message
       const uuid = uuidv4();
 
-      // Generate the secret link (no need to include encryption key in URL)
       const baseUrl = window.location.origin;
       const secretLink = `${baseUrl}/secret-messages/${uuid}`;
 
@@ -92,7 +88,6 @@ const AuthenticatedContent = () => {
       const timer = setTimeout(() => {
         setSuccessLink(false);
       }, 3000);
-      // Cleanup if the component unmounts or success changes early
       return () => clearTimeout(timer);
     }
   }, [successLink]);

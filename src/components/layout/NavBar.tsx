@@ -59,14 +59,12 @@ const NavBar = () => {
     };
   }, [isMobileMenuOpen]);
 
-  // Get inbox messages only when signed in
   const inboxMessages =
     useQuery(api.secretMessages.getInboxMessages, isSignedIn ? {} : "skip") ||
     [];
 
-  // Calculate unread messages
   const unreadCount = inboxMessages.filter(
-    (message) => !viewedMessages.includes(message.uuid)
+    (message) => !viewedMessages.includes(message.uuid),
   ).length;
 
   // Update viewed messages when user visits inbox
@@ -80,7 +78,6 @@ const NavBar = () => {
   // Helper function to check if a path is active
   const isActive = (path: string) => {
     if (path === "/home") {
-      // Consider both /home and / as active for the Home link
       return location.pathname === "/home" || location.pathname === "/";
     }
     return location.pathname === path;
@@ -163,7 +160,7 @@ const NavBar = () => {
             })}
           </div>
 
-          {/* User Profile / Auth Section */}
+          {/* User Profile */}
           <div className="flex items-center space-x-4">
             <Authenticated>
               <Link
@@ -229,7 +226,6 @@ const NavBar = () => {
             className="md:hidden bg-gray-800 py-2 px-4 rounded-b-lg border-t border-gray-700"
           >
             {navItems.map((item) => {
-              // Skip auth-required items for unauthenticated users
               if (item.requireAuth && !isSignedIn) return null;
 
               return (

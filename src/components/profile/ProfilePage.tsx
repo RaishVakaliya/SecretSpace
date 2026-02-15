@@ -11,7 +11,6 @@ import LikeButton from "../../common/LikeButton";
 import CommonFooter from "../../common/CommonFooter";
 import ImageModal from "../../common/ImageModal";
 
-// Define the Post type
 interface Post {
   _id: Id<"posts">;
   _creationTime: number;
@@ -53,7 +52,6 @@ const ProfilePage = () => {
 
   const deletePost = useMutation(api.posts.deletePost);
 
-  // Add the new mutation for deleting all posts
   const deleteAllPosts = useMutation(api.posts.deleteAllUserPosts);
 
   const handleDeleteAllPosts = () => {
@@ -80,7 +78,6 @@ const ProfilePage = () => {
     setShowDeleteAllConfirmation(false);
   };
 
-  // Format the date when the user was created
   const memberSince = new Date(
     clerkUser?.createdAt || Date.now(),
   ).toLocaleDateString("en-US", {
@@ -324,7 +321,6 @@ const ProfilePage = () => {
               ))}
             </div>
           )}
-          {/* Show more/less button */}
           {userPosts.length > 4 && (
             <div className="mt-4 text-center">
               <button

@@ -18,7 +18,7 @@ const ViewSecretMessagePage = () => {
     uuid: uuid || "",
   });
   const deleteSecretMessage = useMutation(
-    api.secretMessages.deleteSecretMessage
+    api.secretMessages.deleteSecretMessage,
   );
 
   useEffect(() => {
@@ -44,31 +44,28 @@ const ViewSecretMessagePage = () => {
           return;
         }
 
-        // Get user's email and normalize it
         const userEmail = user.emailAddresses[0].emailAddress
           .toLowerCase()
           .trim();
 
-        // Check if this message is intended for this user
         if (secretMessage.recipientEmail !== userEmail) {
           setError(
-            "This message is not for you! Only the intended recipient can view this message."
+            "This message is not for you! Only the intended recipient can view this message.",
           );
           setIsDecrypting(false);
           return;
         }
 
-        // Try to decrypt using the user's email as the key
         try {
           const bytes = CryptoJS.AES.decrypt(
             secretMessage.encryptedContent,
-            userEmail
+            userEmail,
           );
           const decrypted = bytes.toString(CryptoJS.enc.Utf8);
 
           if (!decrypted) {
             setError(
-              "Unable to decrypt the message. Please make sure you're using the correct email address."
+              "Unable to decrypt the message. Please make sure you're using the correct email address.",
             );
             setIsDecrypting(false);
             return;
@@ -76,13 +73,12 @@ const ViewSecretMessagePage = () => {
 
           setDecryptedMessage(decrypted);
 
-          // Delete the message after it's been viewed
           await deleteSecretMessage({ messageId: secretMessage._id });
           setMessageDeleted(true);
         } catch (decryptError) {
           console.error("Decryption error:", decryptError);
           setError(
-            "Unable to decrypt the message. Please make sure you're using the correct email address."
+            "Unable to decrypt the message. Please make sure you're using the correct email address.",
           );
         }
       } catch (error) {

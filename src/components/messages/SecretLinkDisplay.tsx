@@ -38,7 +38,7 @@ const SecretLinkDisplay = ({
   const [showCopiedPopup, setShowCopiedPopup] = useState(false);
   const { setSuccessLink } = useSuccessStore();
   const createSecretMessage = useMutation(
-    api.secretMessages.createSecretMessage
+    api.secretMessages.createSecretMessage,
   );
 
   const copyToClipboard = () => {
@@ -67,7 +67,7 @@ const SecretLinkDisplay = ({
           // Encrypt the message using AES with recipient's email as key
           const encryptedMessage = CryptoJS.AES.encrypt(
             message,
-            encryptionKey
+            encryptionKey,
           ).toString();
 
           // Calculate expiration time
@@ -86,7 +86,7 @@ const SecretLinkDisplay = ({
           setShowPasteSection(false);
           setError(null);
           setMessage("");
-          setExpirationHours(1440); // Reset to 24 hours (in minutes)
+          setExpirationHours(1440);
           setShowLink(false);
           setSuccessLink(true);
         } catch (error) {
@@ -160,7 +160,6 @@ const SecretLinkDisplay = ({
   `}
                 style={{ minWidth: "150px", minHeight: "48px" }}
               >
-                {/* Text (kept invisible when loading to avoid shrink) */}
                 <span
                   className={`truncate ease-in-out duration-300 text-sm sm:text-base ${
                     isSending

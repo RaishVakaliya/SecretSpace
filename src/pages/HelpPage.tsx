@@ -14,7 +14,6 @@ const HelpPage = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  // Hide button when on /contact
   if (location.pathname === "/contact") return null;
   return (
     <div className="min-h-screen">

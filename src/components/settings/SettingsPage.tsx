@@ -33,21 +33,18 @@ const SettingsPage = () => {
   const [editedUsername, setEditedUsername] = useState("");
   const [editedImage, setEditedImage] = useState("");
 
-  // Mutations
   const deleteAccount = useMutation(api.users.deleteAccount);
   const updateUser = useMutation(api.users.updateUser);
   const updatePrivacySettings = useMutation(api.users.updatePrivacySettings);
   const updateEmailSettings = useMutation(api.users.updateEmailSettings);
 
-  // Initialize settings from user data when component mounts
   useEffect(() => {
     if (user) {
-      setIsSearchable(user.searchable !== false); // Default to true if not set
-      setEmailNotificationsEnabled(user.emailNotifications !== false); // Default to true if not set
+      setIsSearchable(user.searchable !== false);
+      setEmailNotificationsEnabled(user.emailNotifications !== false);
     }
   }, [user]);
 
-  // Add function to validate image URL
   const validateImageUrl = (url: string) => {
     if (!url) {
       setIsImageValid(true);
@@ -67,12 +64,10 @@ const SettingsPage = () => {
     img.src = url;
   };
 
-  // Validate image URL when it changes
   useEffect(() => {
     validateImageUrl(editedImage);
   }, [editedImage]);
 
-  // Add function to handle edit profile click
   const handleEditProfileClick = () => {
     setEditedFullname(user.fullname);
     setEditedUsername(user.username);
@@ -81,13 +76,11 @@ const SettingsPage = () => {
     setIsEditing(true);
   };
 
-  // Add function to cancel edit profile
   const cancelEditProfile = () => {
     setIsEditing(false);
     setIsImageValid(true);
   };
 
-  // Update function to save privacy settings
   const savePrivacySettings = async () => {
     setIsUpdatingPrivacySettings(true);
     try {
@@ -101,7 +94,6 @@ const SettingsPage = () => {
     }
   };
 
-  // Add function to save profile changes
   const saveProfileChanges = async () => {
     setIsUpdating(true);
     try {
@@ -137,7 +129,6 @@ const SettingsPage = () => {
     let convexDeleted = false;
 
     try {
-      // Try to delete from Convex first
       await deleteAccount();
       convexDeleted = true;
     } catch (error) {
@@ -160,16 +151,15 @@ const SettingsPage = () => {
       // Handle the error based on whether Convex deletion succeeded
       if (convexDeleted) {
         setDeleteError(
-          "Your account was removed from our database, but we couldn't delete your authentication data. Please contact support."
+          "Your account was removed from our database, but we couldn't delete your authentication data. Please contact support.",
         );
       } else {
         setDeleteError(
-          "We couldn't delete your account. Please try again later or contact support."
+          "We couldn't delete your account. Please try again later or contact support.",
         );
       }
 
       setIsDeletingAccount(false);
-      // Keep the modal open so user can see the error
     }
   };
 
@@ -178,7 +168,6 @@ const SettingsPage = () => {
     setPostToDelete(null);
   };
 
-  // Add function to save email notification settings
   const saveEmailSettings = async () => {
     setIsUpdatingEmailSettings(true);
     try {

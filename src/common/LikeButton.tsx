@@ -17,27 +17,21 @@ const LikeButton = ({ postId, initialLikeCount }: LikeButtonProps) => {
   // Check if the current user has liked this post
   const hasLiked = useQuery(api.posts.hasUserLikedPost, { postId }) || false;
 
-  // Get real-time like count
   const currentLikeCount = useQuery(api.posts.getPostLikeCount, { postId });
 
-  // Update like count when it changes in the database
   useEffect(() => {
     if (currentLikeCount !== undefined) {
       setLikeCount(currentLikeCount);
     }
   }, [currentLikeCount]);
 
-  // Toggle like mutation
   const toggleLike = useMutation(api.posts.toggleLike);
 
-  // Handle like button click
   const handleLikeClick = async () => {
-    if (!currentUser) return; // Do nothing if not logged in
+    if (!currentUser) return;
 
     try {
       await toggleLike({ postId });
-      // Note: We don't need to manually update the count here anymore
-      // as the subscription will handle it
     } catch (error) {
       console.error("Error toggling like:", error);
     }

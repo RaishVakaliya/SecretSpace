@@ -8,7 +8,7 @@ export default function FeedbackPage() {
     name: "",
     email: "",
     rating: "",
-    feedbackType: "suggestion", // from first code
+    feedbackType: "suggestion",
     message: "",
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -16,7 +16,6 @@ export default function FeedbackPage() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [error, setError] = useState("");
 
-  // Convex backend mutation
   const submitFeedback = useMutation(api.feedback.submitFeedback);
 
   const feedbackOptions = [
@@ -34,7 +33,7 @@ export default function FeedbackPage() {
   };
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -210,7 +209,7 @@ export default function FeedbackPage() {
                       <span>
                         {
                           feedbackOptions.find(
-                            (opt) => opt.value === formData.feedbackType
+                            (opt) => opt.value === formData.feedbackType,
                           )?.label
                         }
                       </span>

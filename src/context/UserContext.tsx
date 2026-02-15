@@ -24,7 +24,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const createUser = useMutation(api.users.createUser);
   const convexUser = useQuery(
     api.users.getUserByClerkId,
-    isSignedIn ? { clerkId: userId! } : "skip"
+    isSignedIn ? { clerkId: userId! } : "skip",
   );
 
   useEffect(() => {
@@ -44,15 +44,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         }
 
         if (convexUser === null) {
-          // User doesn't exist in Convex
-          // If we were previously signed in but now the user is null,
-          // it might mean the user was deleted
           if (user !== null) {
-            // User was deleted, sign out from Clerk
-            // Clerk may not be globally available in all environments
             try {
-              // Prefer using useAuth signOut if available via hook context
-              // Fallback to global Clerk if present
               // @ts-ignore - optional global in some setups
               if (typeof window !== "undefined" && window.Clerk?.signOut) {
                 // @ts-ignore
@@ -73,7 +66,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       } catch (error) {
         console.error("Error syncing user:", error);
         setError(
-          error instanceof Error ? error.message : "Failed to sync user"
+          error instanceof Error ? error.message : "Failed to sync user",
         );
       } finally {
         setIsLoading(false);
