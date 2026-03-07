@@ -11,11 +11,13 @@ export const sendSecretMessageNotification = internalAction({
       firstName = "",
       lastName = "",
       profileImage = "",
+      isNewUser = false,
     }: {
       toEmail: string;
       firstName?: string;
       lastName?: string;
       profileImage?: string;
+      isNewUser?: boolean;
     },
   ) => {
     const maxRetries = 3;
@@ -31,12 +33,33 @@ export const sendSecretMessageNotification = internalAction({
       "https://res.cloudinary.com/dzwwok8fj/image/upload/v1755418057/default_avatar.jpg";
     const userProfileImage = profileImage || defaultProfileImage;
 
+    const subject = isNewUser
+      ? "Unlock Your Secret Message on SecretSpace 🔒"
+      : "You have received a new secret message on SecretSpace";
+
+    const welcomeContent = isNewUser
+      ? `
+          <div style="margin-top: 24px; padding: 20px; background-color: #f9fafb; border-radius: 12px; text-align: left; border: 1px solid #e5e7eb;">
+            <h3 style="color: #6366f1; margin-top: 0; font-size: 18px;">Welcome to SecretSpace!</h3>
+            <p style="color: #4b5563; font-size: 14px; line-height: 1.6; margin-bottom: 0;">
+              SecretSpace is a sanctuary for authentic expression. We've built a realm where:
+              <ul style="margin-top: 10px; padding-left: 20px; color: #4b5563;">
+                <li><strong>Your Privacy is Priority:</strong> We have zero data collection policies.</li>
+                <li><strong>Truly Secret:</strong> All messages are protected with end-to-end encryption.</li>
+                <li><strong>Self-Destructing:</strong> Messages disappear forever once they are read.</li>
+              </ul>
+              Join our community of over 10,000 users who share their truths safely and anonymously.
+            </p>
+          </div>
+        `
+      : "";
+
     while (currentAttempt < maxRetries) {
       try {
         const data = await resend.emails.send({
           from: "SecretSpace <no-reply@mail.secretspace.me>",
           to: toEmail,
-          subject: "You have received a new secret message on SecretSpace",
+          subject: subject,
           html: `
                   <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px; background-color: #ffffff; text-align: center;">
                     <!-- Logo + App Name -->
@@ -49,7 +72,7 @@ export const sendSecretMessageNotification = internalAction({
                       <span style="font-size: 32px; font-weight: bold; color: #111827; vertical-align: middle;">SecretSpace</span>
                     </div>      
 
-                    <h2 style="color: #6366f1; margin-bottom: 0; margin-top: 0;">New Secret Message</h2>
+                    <h2 style="color: #6366f1; margin-bottom: 0; margin-top: 0;">${isNewUser ? "Someone Sent You a Secret" : "New Secret Message"}</h2>
 
                     <!-- Profile Section -->
                     <div style="margin: 16px 0; text-align: center;">
@@ -74,7 +97,9 @@ export const sendSecretMessageNotification = internalAction({
                     </div>
 
                     <p style="margin-bottom: 13; margin-top: 0;">You have received a new secret message on SecretSpace.</p>
-                    <p style="margin-bottom: 0; margin-top: 0;">Please log in to your account to view the message. Remember, secret messages can only be viewed once and will self-destruct after viewing.</p>
+                    <p style="margin-bottom: 0; margin-top: 0;">${isNewUser ? "To read this message, you'll need to create a SecretSpace account. " : "Please log in to your account to view the message. "}Remember, secret messages can only be viewed once and will self-destruct after viewing.</p>
+
+                    ${welcomeContent}
 
                     <!-- Button -->
                     <div style="margin: 30px 0; text-align:center;">
@@ -87,7 +112,7 @@ export const sendSecretMessageNotification = internalAction({
                           border-radius:8px; 
                           font-weight:bold;
                           font-size:16px;">
-                        View Message
+                        ${isNewUser ? "Join and Reveal Message" : "View Message"}
                       </a>
                     </div>
 

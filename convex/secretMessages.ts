@@ -54,6 +54,7 @@ export const createSecretMessage = mutation({
                 firstName,
                 lastName,
                 profileImage: recipient.image || "",
+                isNewUser: false,
               },
             );
           }
@@ -65,6 +66,7 @@ export const createSecretMessage = mutation({
               toEmail: args.recipientEmail,
               firstName: "",
               lastName: "",
+              isNewUser: true,
             },
           );
         }
