@@ -110,11 +110,10 @@ const ConfessionsPage = () => {
 
   return (
     <div className="min-h-screen relative">
-      {/* Share Confession Button - Responsive positioning */}
-      <div className="absolute right-3 top-0 z-30 sm:right-5">
+      <div className="absolute right-3 top-0 z-30 sm:fixed sm:top-24 sm:right-6 md:right-10 lg:right-16 transition-all duration-300">
         <button
           onClick={handleNewPostClick}
-          className="bg-[#226bb8] hover:bg-[#297cd5] text-white px-3 py-2 sm:px-6 sm:py-3 font-medium transition-colors rounded-md cursor-pointer whitespace-nowrap shadow-lg text-sm sm:text-base"
+          className="bg-[#226bb8] hover:bg-[#297cd5] hover:scale-105 active:scale-95 text-white px-3 py-2 sm:px-6 sm:py-3 font-medium transition-all rounded-md cursor-pointer whitespace-nowrap shadow-xl text-sm sm:text-base border border-[#ffffff1a]"
         >
           <FaPlus className="inline mr-1 sm:mr-2" />
           <span className="hidden sm:inline">Share Your Confession</span>

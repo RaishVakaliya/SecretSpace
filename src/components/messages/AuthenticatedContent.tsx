@@ -47,20 +47,32 @@ const AuthenticatedContent = () => {
     };
   }, []);
 
+  const isValidEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setSuccess(false);
     setShowLink(false);
 
+    let finalRecipientEmail = recipientEmail;
+
     if (!message.trim()) {
       setError("Please enter a message");
       return;
     }
 
-    if (!recipientEmail.trim()) {
-      setError("Please select a recipient email first");
-      return;
+    if (!finalRecipientEmail.trim()) {
+      // Fallback: Check if searchQuery itself is a valid email
+      if (isValidEmail(searchQuery.trim())) {
+        finalRecipientEmail = searchQuery.trim();
+        setRecipientEmail(finalRecipientEmail);
+      } else {
+        setError("Please select a recipient email or enter a valid one");
+        return;
+      }
     }
 
     try {
@@ -227,7 +239,11 @@ const AuthenticatedContent = () => {
                 <button
                   type="submit"
                   className="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-6 rounded-md transition-colors shadow-lg transform sm:hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
-                  disabled={isSubmitting || !recipientEmail || !message}
+                  disabled={
+                    isSubmitting ||
+                    (!recipientEmail && !isValidEmail(searchQuery.trim())) ||
+                    !message
+                  }
                 >
                   {isSubmitting ? "Generating..." : "Generate Secret Link"}
                 </button>
