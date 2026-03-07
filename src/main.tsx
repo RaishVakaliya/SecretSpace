@@ -16,12 +16,17 @@ const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL as string);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+    <ClerkProvider
+      publishableKey={PUBLISHABLE_KEY}
+      afterSignOutUrl="/"
+      signInFallbackRedirectUrl="/home"
+      signUpFallbackRedirectUrl="/home"
+    >
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
         <UserProvider>
           <App />
         </UserProvider>
       </ConvexProviderWithClerk>
     </ClerkProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
