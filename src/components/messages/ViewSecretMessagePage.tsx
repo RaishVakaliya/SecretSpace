@@ -34,7 +34,6 @@ const ViewSecretMessagePage = () => {
         }
 
         if (!secretMessage) {
-          // Still loading or message not found
           return;
         }
 
@@ -99,14 +98,14 @@ const ViewSecretMessagePage = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-2">
+    <div className="w-full max-w-4xl mx-auto px-4 py-2">
       <div className="mb-8">
         <h2 className="text-3xl font-bold text-center mb-6 text-[#f5f6fa]">
           Secret Message
         </h2>
       </div>
 
-      <div className="bg-[#18283b] rounded-lg shadow-xl p-6 max-w-2xl mx-auto">
+      <div className="w-full bg-[#18283b] rounded-lg shadow-xl p-6">
         {isDecrypting ? (
           <div className="text-center py-10">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500 mx-auto mb-4"></div>

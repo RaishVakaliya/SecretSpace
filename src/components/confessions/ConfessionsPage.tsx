@@ -110,7 +110,7 @@ const ConfessionsPage = () => {
 
   return (
     <div className="min-h-screen relative">
-      <div className="absolute right-3 top-0 z-30 sm:fixed sm:top-24 sm:right-6 md:right-10 lg:right-16 transition-all duration-300">
+      <div className="absolute right-3 top-0 z-30 sm:fixed sm:top-24 sm:right-6 md:right-10 lg:right-12 transition-all duration-300">
         <button
           onClick={handleNewPostClick}
           className="bg-[#226bb8] hover:bg-[#297cd5] hover:scale-105 active:scale-95 text-white px-3 py-2 sm:px-6 sm:py-3 font-medium transition-all rounded-md cursor-pointer whitespace-nowrap shadow-xl text-sm sm:text-base border border-[#ffffff1a]"
@@ -134,7 +134,6 @@ const ConfessionsPage = () => {
             {filterOption === "mostCommented" && "Most Commented Confessions"}
           </h3>
 
-          {/* Filter options - Stack on mobile, horizontal on larger screens */}
           <div className="flex flex-wrap justify-center sm:justify-end gap-2 sm:space-x-2">
             <button
               onClick={() => handleFilterChange("recent")}
@@ -157,7 +156,6 @@ const ConfessionsPage = () => {
           </div>
         </div>
 
-        {/* Confessions Feed */}
         <div className="space-y-6">
           {!confessions ? (
             <div className="flex justify-center py-12 pb-48">
@@ -191,7 +189,6 @@ const ConfessionsPage = () => {
                       </p>
                     )}
 
-                    {/* Image displayed below text */}
                     {post.imageUrl && (
                       <div className="mb-4">
                         <img
@@ -207,13 +204,11 @@ const ConfessionsPage = () => {
                     )}
 
                     <div className="flex items-center space-x-6 pt-2 border-t border-gray-700">
-                      {/* Like Button Component */}
                       <LikeButton
                         postId={post._id}
                         initialLikeCount={post.likes}
                       />
 
-                      {/* Comment Toggle Button */}
                       <CommentSection
                         postId={post._id}
                         renderOnlyToggleButton={true}
@@ -222,7 +217,6 @@ const ConfessionsPage = () => {
                       />
                     </div>
 
-                    {/* Comment Section */}
                     {showComments[post._id] && (
                       <CommentSection
                         postId={post._id}
@@ -238,14 +232,12 @@ const ConfessionsPage = () => {
       </div>
       <CommonFooter />
 
-      {/* Image Modal */}
       <ImageModal
         imageUrl={selectedImage || ""}
         isOpen={!!selectedImage}
         onClose={() => setSelectedImage(null)}
       />
 
-      {/* Scroll to top message */}
       {showScrollTop && (
         <div
           onClick={scrollToTop}

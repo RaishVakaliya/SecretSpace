@@ -44,7 +44,6 @@ const ProfilePage = () => {
 
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  // Calculate visible confessions
   const visibleConfessions = showAllConfessions
     ? userPosts
     : userPosts.slice(0, 4);
@@ -126,10 +125,9 @@ const ProfilePage = () => {
           Your Profile
         </h2>
 
-        {/* Profile Card */}
         <div className="bg-gray-800 rounded-xl p-4 sm:p-8 border border-gray-700 mb-8">
           <div className="flex flex-col items-center">
-            <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden mb-6 border-2 border-[#058fab]">
+            <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden mb-6">
               {user?.image ? (
                 <img
                   src={user.image}
@@ -189,7 +187,6 @@ const ProfilePage = () => {
                 </div>
               </div>
 
-              {/* Add buttons below the 3-stat grid */}
               <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-6 sm:mt-8">
                 <button
                   onClick={handleShareConfessionClick}
@@ -208,13 +205,11 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        {/* User's Confessions Section */}
         <div className="bg-gray-800 rounded-xl p-4 sm:p-8 border border-gray-700">
           <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-2">
             <h4 className="text-lg sm:text-xl font-semibold text-gray-300">
               Your Confessions
             </h4>
-            {/* Add Delete All Confessions button */}
             {userPosts.length > 0 && (
               <button
                 onClick={handleDeleteAllPosts}
@@ -231,7 +226,6 @@ const ProfilePage = () => {
             </p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Keep the existing confessions display code */}
               {visibleConfessions.map((post) => (
                 <div
                   key={post._id}
@@ -253,7 +247,6 @@ const ProfilePage = () => {
                     </div>
                   )}
 
-                  {/* Add Like Button and Comment Toggle in a single row */}
                   <div className="mt-auto pt-3 flex items-center justify-between border-t border-[#2c3e50]">
                     <div className="flex items-center gap-2 sm:gap-4">
                       <LikeButton
@@ -265,7 +258,6 @@ const ProfilePage = () => {
                         renderOnlyToggleButton={true}
                         onToggle={() =>
                           setCommentSectionStates((prev) => ({
-                            // Use functional update
                             ...prev,
                             [post._id]: !prev[post._id],
                           }))
@@ -301,7 +293,6 @@ const ProfilePage = () => {
                     </button>
                   </div>
 
-                  {/* Render full CommentSection based on state */}
                   {commentSectionStates[post._id] && (
                     <div className="mt-4 pt-2 border-t border-[#2c3e50]">
                       <CommentSection
@@ -309,7 +300,6 @@ const ProfilePage = () => {
                         showCommentsProp={true}
                         onToggle={() =>
                           setCommentSectionStates((prev) => ({
-                            // Allow toggling off
                             ...prev,
                             [post._id]: !prev[post._id],
                           }))
@@ -338,14 +328,12 @@ const ProfilePage = () => {
 
       <CommonFooter />
 
-      {/* Image Modal */}
       <ImageModal
         imageUrl={selectedImage || ""}
         isOpen={!!selectedImage}
         onClose={() => setSelectedImage(null)}
       />
 
-      {/* Delete Confession Modal  */}
       <DeleteConfirmationModal
         isOpen={showDeleteConfirmation}
         onCancel={cancelDelete}
@@ -356,7 +344,6 @@ const ProfilePage = () => {
         confirmLabel="Delete"
       />
 
-      {/* Delete All Confession Modal  */}
       <DeleteConfirmationModal
         isOpen={showDeleteAllConfirmation}
         onCancel={cancelDeleteAllPosts}

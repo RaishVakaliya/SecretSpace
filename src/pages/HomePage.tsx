@@ -1,4 +1,4 @@
-import { FaComments, FaHeart, FaShieldAlt } from "react-icons/fa";
+import { FaClock, FaHeart, FaShieldAlt } from "react-icons/fa";
 import HomeFooter from "./HomeFooter";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -22,7 +22,6 @@ const HomePage = () => {
               A secure platform for sharing your thoughts, confessions, and
               secret messages in a safe, anonymous environment.
             </p>
-            {/* Hero Section */}
             <div
               className="relative bg-gradient-to-br from-purple-900 via-gray-800 to-gray-900 rounded-2xl overflow-hidden mb-12"
               style={{
@@ -63,7 +62,6 @@ const HomePage = () => {
                 </div>
               </div>
             </div>
-            {/* Feature Cards */}
             <div className="grid md:grid-cols-3 gap-8 mb-12">
               <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
                 <div className="w-16 h-16 bg-[#297cd5] bg-opacity-20 rounded-lg flex items-center justify-center mx-auto mb-4">
@@ -79,14 +77,14 @@ const HomePage = () => {
               </div>
               <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
                 <div className="w-16 h-16 bg-[#297cd5] bg-opacity-20 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <FaComments className="fas fa-comments text-[#6486ab]  text-2xl" />
+                  <FaClock className="fas fa-clock text-[#6486ab] text-2xl" />
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-3">
-                  Open Conversations
+                  Self-Destructing Messages
                 </h3>
                 <p className="text-gray-300">
-                  Engage in meaningful discussions and connect with others
-                  through shared experiences.
+                  Create links that disappear forever after being read once,
+                  ensuring your sensitive information stays private.
                 </p>
               </div>
               <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
@@ -102,7 +100,6 @@ const HomePage = () => {
                 </p>
               </div>
             </div>
-            {/* Stats Section */}
             <div className="bg-gray-800 rounded-xl p-8 border border-gray-700">
               <div className="grid md:grid-cols-4 gap-8 text-center">
                 <div>

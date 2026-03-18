@@ -21,7 +21,7 @@ const SecretMessagesPage = () => {
         <AuthenticatedContent />
       </Authenticated>
       <Unauthenticated>
-        <div className="container mx-auto px-4 py-12">
+        <div className="w-full max-w-4xl mx-auto px-4 py-12">
           <div className="mb-8">
             <h2 className="text-4xl font-bold text-center mb-6 text-white">
               Secret Messages

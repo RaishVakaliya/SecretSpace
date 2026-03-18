@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { useMutation } from "convex/react";
+import { useAction } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { MdOutlineEmail } from "react-icons/md";
 import { PiMapPin } from "react-icons/pi";
 import { FiPhone } from "react-icons/fi";
 import { LuSend } from "react-icons/lu";
 import CommonFooter from "../common/CommonFooter";
+
 const ContactUsPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,8 +16,7 @@ const ContactUsPage = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
 
-  // Use the same feedback mutation for now
-  const submitContact = useMutation(api.feedback.submitFeedback);
+  const sendEmail = useAction(api.contact.sendContactEmail);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,10 +24,11 @@ const ContactUsPage = () => {
     setError("");
 
     try {
-      await submitContact({
-        feedbackType: "contact",
-        feedbackText: `Name: ${name}\nSubject: ${subject}\nMessage: ${message}`,
-        email: email,
+      await sendEmail({
+        name,
+        email,
+        subject,
+        message,
       });
 
       setIsSubmitted(true);
@@ -48,7 +49,6 @@ const ContactUsPage = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
       <div className="pt-12">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl text-white mx-auto">
@@ -80,10 +80,8 @@ const ContactUsPage = () => {
           </button>
         </div>
       ) : (
-        // Contact Section
         <div className="container mx-auto px-4 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Contact Info */}
             <div className="lg:col-span-1">
               <div className="space-y-6">
                 <div className="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden shadow-lg">
@@ -124,7 +122,6 @@ const ContactUsPage = () => {
               </div>
             </div>
 
-            {/* Contact Form */}
             <div className="lg:col-span-2">
               <div className="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden shadow-elegant">
                 <div className="p-6 border-b border-gray-700">

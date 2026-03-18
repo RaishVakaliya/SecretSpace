@@ -67,7 +67,6 @@ const NavBar = () => {
     (message) => !viewedMessages.includes(message.uuid),
   ).length;
 
-  // Update viewed messages when user visits inbox
   useEffect(() => {
     if (location.pathname === "/inbox" && inboxMessages.length > 0) {
       const messageIds = inboxMessages.map((message) => message.uuid);
@@ -75,7 +74,6 @@ const NavBar = () => {
     }
   }, [location.pathname, inboxMessages]);
 
-  // Helper function to check if a path is active
   const isActive = (path: string) => {
     if (path === "/home") {
       return location.pathname === "/home" || location.pathname === "/";
@@ -122,7 +120,6 @@ const NavBar = () => {
       <div className="max-w-7xl mx-auto px-4">
         {" "}
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
           <div className="flex items-center">
             <Link to="/home" className="flex items-center space-x-2">
               <div className="h-8 w-8 mr-2">
@@ -132,10 +129,8 @@ const NavBar = () => {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => {
-              // Skip auth-required items for unauthenticated users
               if (item.requireAuth && !isSignedIn) return null;
 
               return (
@@ -160,7 +155,6 @@ const NavBar = () => {
             })}
           </div>
 
-          {/* User Profile */}
           <div className="flex items-center space-x-4">
             <Authenticated>
               <Link
@@ -194,7 +188,6 @@ const NavBar = () => {
               <AuthLoader />
             </AuthLoading>
 
-            {/* Mobile menu button */}
             <div className="md:hidden">
               <button
                 ref={buttonRef}
@@ -219,7 +212,6 @@ const NavBar = () => {
             </div>
           </div>
         </div>
-        {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
           <div
             ref={menuRef}

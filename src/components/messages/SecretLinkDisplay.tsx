@@ -61,19 +61,15 @@ const SecretLinkDisplay = ({
       if (uuid) {
         try {
           setIsSending(true);
-          // Use recipient's email as the encryption key
           const encryptionKey = recipientEmail.toLowerCase().trim();
 
-          // Encrypt the message using AES with recipient's email as key
           const encryptedMessage = CryptoJS.AES.encrypt(
             message,
             encryptionKey,
           ).toString();
 
-          // Calculate expiration time
           const expiresAt = Date.now() + expirationHours * 60 * 1000;
 
-          // Save the encrypted message to the database
           await createSecretMessage({
             encryptedContent: encryptedMessage,
             uuid,
@@ -170,7 +166,6 @@ const SecretLinkDisplay = ({
                   Send Link
                 </span>
 
-                {/* Loader + processing text */}
                 <div
                   className={`absolute flex flex-row justify-center items-center gap-2 ease-in-out duration-300 text-sm sm:text-base ${
                     isSending
@@ -182,7 +177,6 @@ const SecretLinkDisplay = ({
                   Sending...
                 </div>
 
-                {/* Icon */}
                 {!isSending && (
                   <svg
                     className="fill-white group-hover:fill-purple-100 ease-in-out duration-700 group-hover:-translate-x-0 group-active:translate-x-96 group-active:duration-0 group-focus:translate-x-96 group-focus:fill-purple-100"

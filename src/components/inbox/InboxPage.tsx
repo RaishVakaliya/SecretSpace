@@ -21,7 +21,6 @@ const InboxPage = () => {
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [timeLeft, setTimeLeft] = useState<Record<string, string>>({});
 
-  // Force refresh every minute to check for newly expired messages
   useEffect(() => {
     const interval = setInterval(() => {
       setRefreshTrigger((prev) => prev + 1);

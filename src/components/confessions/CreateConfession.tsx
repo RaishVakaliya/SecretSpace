@@ -13,7 +13,6 @@ const CreateConfession = () => {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
-  // Regular authenticated mutations
   const generateUploadUrl = useMutation(api.posts.generateUploadUrl);
   const createPost = useMutation(api.posts.createPost);
   const createTextPost = useMutation(api.posts.createTextPost);
@@ -59,7 +58,6 @@ const CreateConfession = () => {
           ? await generateUploadUrl()
           : await generateAnonymousUploadUrl();
 
-        // Upload the image
         const result = await fetch(uploadUrl, {
           method: "POST",
           headers: { "Content-Type": image.type },
@@ -70,7 +68,6 @@ const CreateConfession = () => {
           throw new Error("Failed to upload image");
         }
 
-        // Get the storage ID from the upload response
         const { storageId } = await result.json();
 
         if (user) {
@@ -96,7 +93,6 @@ const CreateConfession = () => {
         }
       }
 
-      // Reset form
       setText("");
       setImage(null);
       setPreviewUrl(null);
@@ -119,7 +115,7 @@ const CreateConfession = () => {
   }, [success]);
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 to-indigo-900 rounded-lg shadow-xl p-6 border border-indigo-700 mb-8">
+    <div className="w-full max-w-4xl mx-auto bg-gradient-to-br from-gray-900 to-indigo-900 rounded-lg shadow-xl p-6 border border-indigo-700 mb-8">
       <h3 className="text-xl font-semibold mb-4 text-indigo-300">
         Share Your Confession
       </h3>
@@ -179,7 +175,6 @@ const CreateConfession = () => {
             )}
           </div>
 
-          {/* Hidden file input */}
           <input
             ref={fileInputRef}
             type="file"

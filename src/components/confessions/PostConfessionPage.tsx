@@ -4,7 +4,7 @@ import CreateConfession from "./CreateConfession";
 const PostConfessionPage = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="container mx-auto px-4 py-12">
+      <div className="w-full max-w-4xl mx-auto px-4 py-12">
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-center mb-6 text-[#f5f6fa]">
             Share Your Confession

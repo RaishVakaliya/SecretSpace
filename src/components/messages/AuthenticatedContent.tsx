@@ -65,7 +65,6 @@ const AuthenticatedContent = () => {
     }
 
     if (!finalRecipientEmail.trim()) {
-      // Fallback: Check if searchQuery itself is a valid email
       if (isValidEmail(searchQuery.trim())) {
         finalRecipientEmail = searchQuery.trim();
         setRecipientEmail(finalRecipientEmail);
@@ -105,7 +104,7 @@ const AuthenticatedContent = () => {
   }, [successLink]);
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="max-w-4xl mx-auto px-4 py-12">
       <div className="mb-8">
         <h2 className="text-4xl font-bold text-center mb-6 text-white">
           Secret Messages
@@ -165,7 +164,6 @@ const AuthenticatedContent = () => {
                 </select>
               </div>
 
-              {/* Recipient Selection */}
               <div className="mt-4">
                 <label className="block text-sm font-medium text-slate-400 mb-2">
                   Send to (required):
