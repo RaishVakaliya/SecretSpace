@@ -98,22 +98,22 @@ const SecretLinkDisplay = ({
   if (!showLink) return null;
 
   return (
-    <div className="mt-6 p-3 sm:p-5 bg-gray-800 rounded-lg border border-purple-700 shadow-inner">
+    <div className="mt-6 p-3 sm:p-5 bg-gray-800 rounded-lg border border-teal-700 shadow-inner">
       <div className="flex flex-col sm:flex-row items-center relative gap-2 sm:gap-0">
         <input
           type="text"
-          className="w-full sm:flex-grow bg-gray-700 text-white p-2 sm:p-3 rounded-md sm:rounded-l-md sm:rounded-r-none focus:outline-none border border-purple-600 sm:border-r-0 text-sm sm:text-base overflow-hidden text-ellipsis"
+          className="w-full sm:flex-grow bg-gray-700 text-white p-2 sm:p-3 rounded-md sm:rounded-l-md sm:rounded-r-none focus:outline-none border border-teal-600 sm:border-r-0 text-sm sm:text-base overflow-hidden text-ellipsis"
           value={secretLink}
           readOnly
         />
         <button
-          className="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 sm:py-3 rounded-md sm:rounded-l-none sm:rounded-r-md border border-purple-600 text-sm sm:text-base"
+          className="w-full sm:w-auto bg-teal-700 hover:bg-teal-600 text-white px-4 py-2 sm:py-3 rounded-md sm:rounded-l-none sm:rounded-r-md border border-teal-600 text-sm sm:text-base"
           onClick={copyToClipboard}
         >
           {showCopiedPopup ? "Copied!" : "Copy"}
         </button>
       </div>
-      <div className="mt-3 text-sm text-purple-400 flex items-center">
+      <div className="mt-3 text-sm text-teal-400 flex items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-4 w-4 mr-1"
@@ -136,7 +136,7 @@ const SecretLinkDisplay = ({
         </span>
       </div>
 
-      <div className="mt-6 border-t border-purple-700 pt-4">
+      <div className="mt-6 border-t border-teal-800 pt-4">
         {showPasteSection && (
           <div className="space-y-3">
             {error && <div className="text-red-400 text-sm">{error}</div>}
@@ -145,13 +145,13 @@ const SecretLinkDisplay = ({
                 type="button"
                 onClick={handleSendLink}
                 disabled={isSending}
-                className={`relative bottom-0 flex justify-center items-center gap-2 border border-purple-600 rounded-xl font-black uppercase px-4 sm:px-8 py-3 sm:py-4 z-10 overflow-hidden ease-in-out duration-700 group isolation-auto w-full sm:w-auto
+                className={`relative bottom-0 flex justify-center items-center gap-2 border border-teal-600 rounded-xl font-black uppercase px-4 sm:px-8 py-3 sm:py-4 z-10 overflow-hidden ease-in-out duration-700 group isolation-auto w-full sm:w-auto
     ${
       isSending
-        ? "bg-purple-100 text-purple-700"
-        : "bg-purple-600 text-white hover:text-purple-100 hover:bg-purple-700 active:scale-95 active:duration-0 focus:bg-purple-700 focus:text-purple-100"
+        ? "bg-teal-100 text-teal-800"
+        : "bg-teal-700 text-white hover:text-teal-100 hover:bg-teal-600 active:scale-95 active:duration-0 focus:bg-teal-600 focus:text-teal-100"
     }
-    before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:bg-purple-700 before:-z-10 before:aspect-square
+    before:absolute before:w-full before:transition-all before:duration-700 before:-left-full before:rounded-full before:bg-teal-600 before:-z-10 before:aspect-square
     ${!isSending ? "before:hover:w-full before:hover:left-0 before:hover:scale-150" : ""}
   `}
                 style={{ minWidth: "150px", minHeight: "48px" }}
@@ -173,13 +173,13 @@ const SecretLinkDisplay = ({
                       : "-translate-x-96 opacity-0 group-active:translate-x-0 group-focus:translate-x-0"
                   }`}
                 >
-                  <div className="animate-spin size-4 border-2 border-purple-700 border-t-transparent rounded-full"></div>
+                  <div className="animate-spin size-4 border-2 border-teal-700 border-t-transparent rounded-full"></div>
                   Sending...
                 </div>
 
                 {!isSending && (
                   <svg
-                    className="fill-white group-hover:fill-purple-100 ease-in-out duration-700 group-hover:-translate-x-0 group-active:translate-x-96 group-active:duration-0 group-focus:translate-x-96 group-focus:fill-purple-100"
+                    className="fill-white group-hover:fill-teal-100 ease-in-out duration-700 group-hover:-translate-x-0 group-active:translate-x-96 group-active:duration-0 group-focus:translate-x-96 group-focus:fill-teal-100"
                     stroke="currentColor"
                     fill="currentColor"
                     strokeWidth="0"

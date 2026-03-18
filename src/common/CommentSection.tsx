@@ -29,7 +29,6 @@ const CommentSection = ({
     const date = new Date(timestamp);
     const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
 
-    // Handle case where client time is behind server time
     if (diffInSeconds < 0) {
       return "just now";
     }
@@ -58,12 +57,10 @@ const CommentSection = ({
       return `${diffInMonths} month${diffInMonths !== 1 ? "s" : ""} ago`;
     }
 
-    // More than a year
     const diffInYears = Math.floor(diffInDays / 365);
     return `${diffInYears} year${diffInYears !== 1 ? "s" : ""} ago`;
   };
 
-  // Determine which showComments state to use
   const showComments =
     showCommentsProp !== undefined ? showCommentsProp : showCommentsInternal;
 
@@ -116,7 +113,6 @@ const CommentSection = ({
     <div className="">
       {showComments && (
         <div className="mt-3">
-          {/* Comment list */}
           <div className="space-y-3 mb-4 max-h-60 overflow-y-auto">
             {comments.length === 0 ? (
               <p className="text-gray-400 text-sm italic">
@@ -148,7 +144,6 @@ const CommentSection = ({
             )}
           </div>
 
-          {/* Comment form */}
           {currentUser ? (
             <form onSubmit={handleSubmitComment} className="mt-3">
               <div className="flex">

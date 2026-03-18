@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useQuery, useConvexAuth } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
-import { useUser, SignInButton } from "@clerk/clerk-react";
+import { useUser } from "@clerk/clerk-react";
 import { Authenticated, Unauthenticated } from "convex/react";
 import CommonFooter from "../../common/CommonFooter";
 import Loader from "../../common/Loader";
+import useScrollToTop from "../../hooks/useScrollToTop";
+import UnauthenticatedView from "../../common/UnauthenticatedView";
 
 interface Message {
   _id: Id<"secret_messages">;
@@ -28,6 +30,8 @@ const InboxPage = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  useScrollToTop();
 
   const inboxMessages =
     useQuery(api.secretMessages.getInboxMessages, isSignedIn ? {} : "skip") ||
@@ -100,9 +104,9 @@ const InboxPage = () => {
             </h2>
 
             <div className="max-w-4xl mx-auto">
-              <div className="bg-[#18283b] rounded-lg shadow-xl p-6 border border-gray-700">
+              <div className="bg-[#0f1f2e] rounded-lg shadow-xl p-6 border border-teal-800">
                 {inboxMessages.length === 0 ? (
-                  <p className="text-center text-indigo-200 py-4">
+                  <p className="text-center text-teal-300 py-4">
                     You don't have any secret messages in your inbox.
                   </p>
                 ) : (
@@ -110,14 +114,14 @@ const InboxPage = () => {
                     {inboxMessages.map((message: Message) => (
                       <div
                         key={message._id}
-                        className="p-4 bg-gray-800 rounded-lg border border-[#2c3e50] hover:border-[#425c76] cursor-pointer transition-colors"
+                        className="p-4 bg-gray-800 rounded-lg border border-teal-900 hover:border-teal-600 cursor-pointer transition-colors"
                         onClick={() => viewMessage(message.uuid)}
                       >
                         <div className="flex justify-between items-center">
-                          <div className="text-indigo-300 font-medium">
+                          <div className="text-teal-300 font-medium">
                             Secret Message
                           </div>
-                          <div className="text-sm text-indigo-400">
+                          <div className="text-sm text-teal-400">
                             <div className="flex items-center">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -147,7 +151,7 @@ const InboxPage = () => {
                                   </span>
                                 ) : (
                                   <svg
-                                    className="animate-spin h-4 w-4 text-indigo-400 ml-1"
+                                    className="animate-spin h-4 w-4 text-teal-400 ml-1"
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
@@ -201,49 +205,14 @@ const InboxPage = () => {
         </div>
       </Authenticated>
       <Unauthenticated>
-        <div className="container mx-auto px-4 py-12">
-          <div className="mb-8">
-            <h2 className="text-4xl font-bold text-center mb-6 text-white">
-              Your Inbox
-            </h2>
-            <p className="text-center text-white max-w-2xl mx-auto">
-              View and manage your received secret messages in one place.
-            </p>
-          </div>
-
-          <div className="bg-gray-800 rounded-lg border border-gray-700 shadow-xl p-6 max-w-4xl mx-auto">
-            <div className="text-center py-10">
-              <div className="mb-6">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-16 w-16 text-white mx-auto"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 15v2m0 0v2m0-2h2m-2 0H9m3-3V9m0 0V7m0 2h2m-2 0H9"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold mb-4 text-white">
-                Authentication Required
-              </h3>
-              <p className="text-white mb-6 max-w-md mx-auto">
-                You need to sign in to view your inbox messages. Sign in to
-                continue.
-              </p>
-              <SignInButton mode="modal">
-                <button className="px-6 py-3 text-black bg-white  hover:bg-gray-400 font-medium rounded-md transition-colors shadow-lg">
-                  Sign In to Continue
-                </button>
-              </SignInButton>
-            </div>
-          </div>
-        </div>
+        <UnauthenticatedView
+          pageTitle="Your Inbox"
+          pageDescription="View and manage your received secret messages in one place."
+          boxDescription="You need to sign in to view your inbox messages. Sign in to continue."
+          boxColorClass="bg-gradient-to-br from-[#060b0d] via-[#0d1c1f] to-[#060b0d] border-teal-800/60 shadow-teal-900/10"
+          buttonColorClass="bg-teal-700 hover:bg-teal-600 shadow-teal-900/40"
+          iconColorClass="text-teal-400"
+        />
         <CommonFooter />
       </Unauthenticated>
     </>

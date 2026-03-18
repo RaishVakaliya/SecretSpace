@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import CommonFooter from "../common/CommonFooter";
+import useScrollToTop from "../hooks/useScrollToTop";
 
 export default function FeedbackPage() {
   const [formData, setFormData] = useState({
@@ -82,9 +83,7 @@ export default function FeedbackPage() {
     setIsSubmitted(false);
   };
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+  useScrollToTop();
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -166,7 +165,6 @@ export default function FeedbackPage() {
                   </div>
                 </div>
 
-                {/* Rating */}
                 <div>
                   <label className="block text-sm font-medium text-gray-200 mb-3">
                     How would you rate your experience?
@@ -196,7 +194,6 @@ export default function FeedbackPage() {
                   </div>
                 </div>
 
-                {/* Feedback Type Dropdown */}
                 <div>
                   <label className="block text-sm font-medium text-gray-200 mb-2">
                     Feedback Type
@@ -243,7 +240,6 @@ export default function FeedbackPage() {
                   </div>
                 </div>
 
-                {/* Message */}
                 <div>
                   <label
                     htmlFor="message"
@@ -266,7 +262,6 @@ export default function FeedbackPage() {
 
                 {error && <div className="text-red-400 text-sm">{error}</div>}
 
-                {/* Submit Button */}
                 <div className="pt-4">
                   <button
                     type="submit"
@@ -286,7 +281,6 @@ export default function FeedbackPage() {
               </form>
             </div>
 
-            {/* Footer */}
             <div className="text-center mt-8 text-gray-400 text-sm">
               <p>
                 Your feedback helps us create better experiences for everyone 💜

@@ -113,7 +113,7 @@ const ConfessionsPage = () => {
       <div className="absolute right-3 top-0 z-30 sm:fixed sm:top-24 sm:right-6 md:right-10 lg:right-12 transition-all duration-300">
         <button
           onClick={handleNewPostClick}
-          className="bg-[#226bb8] hover:bg-[#297cd5] hover:scale-105 active:scale-95 text-white px-3 py-2 sm:px-6 sm:py-3 font-medium transition-all rounded-md cursor-pointer whitespace-nowrap shadow-xl text-sm sm:text-base border border-[#ffffff1a]"
+          className="bg-amber-700 hover:bg-amber-600 hover:scale-105 active:scale-95 text-white px-3 py-2 sm:px-6 sm:py-3 font-medium transition-all rounded-md cursor-pointer whitespace-nowrap shadow-xl text-sm sm:text-base border border-amber-500/20"
         >
           <FaPlus className="inline mr-1 sm:mr-2" />
           <span className="hidden sm:inline">Share Your Confession</span>
@@ -137,19 +137,19 @@ const ConfessionsPage = () => {
           <div className="flex flex-wrap justify-center sm:justify-end gap-2 sm:space-x-2">
             <button
               onClick={() => handleFilterChange("recent")}
-              className={`px-3 py-2 rounded-md text-sm ${filterOption === "recent" ? "bg-indigo-600 text-white" : "bg-gray-700 text-indigo-300 hover:bg-gray-600"}`}
+              className={`px-3 py-2 rounded-md text-sm ${filterOption === "recent" ? "bg-amber-700 text-white" : "bg-gray-700 text-amber-300 hover:bg-gray-600"}`}
             >
               Newest
             </button>
             <button
               onClick={() => handleFilterChange("trending")}
-              className={`px-3 py-2 rounded-md text-sm ${filterOption === "trending" ? "bg-indigo-600 text-white" : "bg-gray-700 text-indigo-300 hover:bg-gray-600"}`}
+              className={`px-3 py-2 rounded-md text-sm ${filterOption === "trending" ? "bg-amber-700 text-white" : "bg-gray-700 text-amber-300 hover:bg-gray-600"}`}
             >
               Most Liked
             </button>
             <button
               onClick={() => handleFilterChange("mostCommented")}
-              className={`px-3 py-2 rounded-md text-sm ${filterOption === "mostCommented" ? "bg-indigo-600 text-white" : "bg-gray-700 text-indigo-300 hover:bg-gray-600"}`}
+              className={`px-3 py-2 rounded-md text-sm ${filterOption === "mostCommented" ? "bg-amber-700 text-white" : "bg-gray-700 text-amber-300 hover:bg-gray-600"}`}
             >
               Most Commented
             </button>
@@ -162,29 +162,29 @@ const ConfessionsPage = () => {
               <Loader size="120px" className="text-3xl" />
             </div>
           ) : confessions.length === 0 ? (
-            <div className="text-center text-gray-400 py-8 pb-72 rounded-xl bg-gray-800 border border-gray-700">
+            <div className="text-center text-amber-300/70 py-8 pb-72 rounded-xl bg-stone-900 border border-amber-900">
               <p>No confessions found. Be the first to share!</p>
             </div>
           ) : (
             confessions.map((post) => (
               <div
                 key={post._id}
-                className="bg-gray-800 rounded-xl p-6 border border-gray-700 break-words break-all whitespace-pre-wrap"
+                className="bg-stone-900 rounded-xl p-6 border border-amber-900/60 break-words break-all whitespace-pre-wrap hover:border-amber-700/80 transition-colors"
               >
                 <div className="flex items-start space-x-4">
                   <div className="flex-1">
                     <div className="flex items-center justify-between space-x-2 mb-2">
-                      <span className="text-gray-400 text-sm">
+                      <span className="text-amber-300/70 text-sm">
                         {currentUser && post.author?._id === currentUser._id
                           ? "You"
                           : "Anonymous User"}
                       </span>
-                      <span className="text-gray-500 text-sm">
+                      <span className="text-amber-400/50 text-sm">
                         • {formatRelativeTime(post._creationTime)}
                       </span>
                     </div>
                     {post.text && (
-                      <p className="text-gray-300 mb-4 break-words whitespace-pre-wrap">
+                      <p className="text-stone-200 mb-4 break-words whitespace-pre-wrap">
                         {post.text}
                       </p>
                     )}
@@ -203,7 +203,7 @@ const ConfessionsPage = () => {
                       </div>
                     )}
 
-                    <div className="flex items-center space-x-6 pt-2 border-t border-gray-700">
+                    <div className="flex items-center space-x-6 pt-2 border-t border-amber-900/50">
                       <LikeButton
                         postId={post._id}
                         initialLikeCount={post.likes}
@@ -246,7 +246,7 @@ const ConfessionsPage = () => {
                sm:right-28 sm:left-auto 
                left-1/2 sm:translate-x-0 -translate-x-1/2
                flex items-center justify-center
-               bg-[#226bb8] hover:bg-[#297cd5] text-white 
+               bg-amber-700 hover:bg-amber-600 text-white 
                p-3 rounded-full shadow-lg cursor-pointer"
         >
           <FaArrowUp />

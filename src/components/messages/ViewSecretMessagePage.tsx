@@ -108,8 +108,8 @@ const ViewSecretMessagePage = () => {
       <div className="w-full bg-[#18283b] rounded-lg shadow-xl p-6">
         {isDecrypting ? (
           <div className="text-center py-10">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500 mx-auto mb-4"></div>
-            <p className="text-purple-300">Decrypting message...</p>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-teal-500 mx-auto mb-4"></div>
+            <p className="text-teal-300">Decrypting message...</p>
           </div>
         ) : error ? (
           <div className="text-center py-10">
@@ -130,10 +130,10 @@ const ViewSecretMessagePage = () => {
               </svg>
             </div>
             <h3 className="text-xl font-semibold mb-4 text-red-300">Error</h3>
-            <p className="text-purple-200 mb-6 max-w-md mx-auto">{error}</p>
+            <p className="text-slate-300 mb-6 max-w-md mx-auto">{error}</p>
             <button
               onClick={handleBackClick}
-              className="px-6 py-3 bg-purple-600 text-white font-medium rounded-md hover:bg-purple-700 transition shadow-lg transform hover:scale-105"
+              className="px-6 py-3 bg-teal-700 text-white font-medium rounded-md hover:bg-teal-600 transition shadow-lg transform hover:scale-105"
             >
               Back
             </button>
@@ -157,7 +157,7 @@ const ViewSecretMessagePage = () => {
               </p>
               <button
                 onClick={handleBackClick}
-                className="px-6 py-3 bg-purple-600 text-[#dae0e6] font-medium rounded-md hover:bg-purple-700 transition shadow-lg transform hover:scale-105"
+                className="px-6 py-3 bg-teal-700 text-white font-medium rounded-md hover:bg-teal-600 transition shadow-lg transform hover:scale-105"
               >
                 Back
               </button>

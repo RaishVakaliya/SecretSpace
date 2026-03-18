@@ -1,16 +1,13 @@
 import { Link } from "react-router-dom";
 import CommonFooter from "../common/CommonFooter";
-import { useEffect } from "react";
+import useScrollToTop from "../hooks/useScrollToTop";
 
 const AboutUsPage = () => {
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+  useScrollToTop();
   return (
     <div className="min-h-screen">
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-6xl mx-auto">
-          {/* Header */}
           <div className="text-center mb-16">
             <h1 className="text-5xl font-bold text-[#e1e7ef] mb-6">
               About Secret Space
@@ -22,7 +19,6 @@ const AboutUsPage = () => {
             </p>
           </div>
 
-          {/* Features Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 hover:shadow-elegant transition-all duration-300">
               <div className="text-contact-accent text-2xl mb-4">🔒</div>
@@ -91,7 +87,6 @@ const AboutUsPage = () => {
             </div>
           </div>
 
-          {/* Privacy Section */}
           <div className="bg-gradient-to-r from-[#232934] to-[#2e3c51] border border-gray-700 rounded-lg p-8 mb-16">
             <h2 className="text-3xl font-bold text-[#e1e7ef] mb-6 text-center">
               Privacy & Security First
@@ -122,7 +117,6 @@ const AboutUsPage = () => {
             </div>
           </div>
 
-          {/* CTA */}
           <div className="text-center">
             <h2 className="text-3xl font-bold text-[#e1e7ef] mb-6">
               Ready to Share Anonymously?

@@ -1,19 +1,14 @@
-import { useEffect } from "react";
+import useScrollToTop from "../hooks/useScrollToTop";
 import { Lock, MessageSquare, Users, Key, Clock } from "lucide-react";
 import CommonFooter from "../common/CommonFooter";
 import { MdOutlinePrivacyTip } from "react-icons/md";
 
 const PrivacyPolicyPage = () => {
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+  useScrollToTop();
 
   return (
     <div className="relative min-h-screen">
-      {/* Subtle Purple Background Glow */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-[#a678f1] opacity-10 blur-3xl rounded-full z-0" />
-
-      {/* Animated Header */}
 
       <div
         className="relative -top-4 overflow-hidden mt-0 pt-0"
@@ -46,7 +41,6 @@ const PrivacyPolicyPage = () => {
       </div>
 
       <div className="max-w-4xl mx-auto px-6 py-8">
-        {/* Key Privacy Features */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold text-white mb-8 text-center">
             🔒 Your Data, Your Control
@@ -124,8 +118,6 @@ const PrivacyPolicyPage = () => {
           </div>
         </section>
 
-        {/* What We Collect */}
-
         <section
           className="mb-12"
           style={{ animation: "fadeInUp 1s ease-out 0.8s both" }}
@@ -173,7 +165,6 @@ const PrivacyPolicyPage = () => {
           </div>
         </section>
 
-        {/* How We Use It */}
         <section
           className="mb-12"
           style={{ animation: "fadeInUp 1s ease-out 1s both" }}
@@ -217,7 +208,6 @@ const PrivacyPolicyPage = () => {
           </div>
         </section>
 
-        {/* Your Rights */}
         <section
           className="mb-12"
           style={{ animation: "fadeInUp 1s ease-out 1.2s both" }}
@@ -272,8 +262,6 @@ const PrivacyPolicyPage = () => {
             </div>
           </div>
         </section>
-
-        {/* Security & Retention */}
 
         <section
           className="mb-12"
@@ -330,7 +318,6 @@ const PrivacyPolicyPage = () => {
           </div>
         </section>
 
-        {/* Contact */}
         <section
           className="text-center py-8"
           style={{ animation: "fadeInUp 1s ease-out 1.6s both" }}

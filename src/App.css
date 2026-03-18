@@ -629,52 +629,6 @@ label[for="nav-footer-toggle"] {
   transition: all 0.5s;
 }
 
-/* edit-profile-button */
-.edit-profile-button {
-  --clr-font-main: hsla(0 0% 20% / 100);
-  --btn-bg-1: #61daff;
-  --btn-bg-2: hsla(217 100% 56% / 1);
-  --btn-bg-color: hsla(360 100% 100% / 1);
-  --radii: 0.5em;
-  cursor: pointer;
-  padding: 0.9em 1.4em;
-  min-width: 120px;
-  min-height: 44px;
-  font-size: var(--size, 1rem);
-  font-weight: 500;
-  transition: 0.8s;
-  background-size: 280% auto;
-  background-image: linear-gradient(
-    325deg,
-    var(--btn-bg-2) 0%,
-    var(--btn-bg-1) 55%,
-    var(--btn-bg-2) 90%
-  );
-  border: none;
-  border-radius: var(--radii);
-  color: var(--btn-bg-color);
-  box-shadow:
-    0px 0px 20px rgba(71, 184, 255, 0.5),
-    0px 5px 5px -1px rgba(58, 125, 233, 0.25),
-    inset 4px 4px 8px rgba(175, 230, 255, 0.5),
-    inset -4px -4px 8px rgba(19, 95, 216, 0.35);
-}
-
-.edit-profile-button:hover {
-  background-position: right top;
-}
-
-.edit-profile-button:is(:focus, :focus-visible, :active) {
-  outline: none;
-  box-shadow: 0 0 0 2px #0bddf0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .edit-profile-button {
-    transition: linear;
-  }
-}
-
 /* emial notification switch */
 .checkbox-apple {
   position: relative;
@@ -734,56 +688,4 @@ label[for="nav-footer-toggle"] {
   left: 0;
   width: 50px;
   height: 25px;
-}
-
-/* logout button */
-.logout-button {
-  background-color: gray;
-  --color: red;
-  font-family: inherit;
-  display: inline-block;
-  width: 100px;
-  height: 50px;
-  line-height: 2.5em;
-  /* margin: 20px; */
-  position: relative;
-  cursor: pointer;
-  overflow: hidden;
-  border: 2px solid gray;
-  transition: color 0.5s;
-  z-index: 1;
-  font-size: 17px;
-  border-radius: 6px;
-  font-weight: 500;
-  color: white;
-}
-
-.logout-button:before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  background: var(--color);
-  height: 150px;
-  width: 200px;
-  border-radius: 50%;
-}
-
-.logout-button:hover {
-  color: #fff;
-}
-
-.logout-button:before {
-  top: 100%;
-  left: 100%;
-  transition: all 0.7s;
-}
-
-.logout-button:hover:before {
-  top: -30px;
-  left: -30px;
-}
-
-.logout-button:active:before {
-  background: gray;
-  transition: background 0s;
 }

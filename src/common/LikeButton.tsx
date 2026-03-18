@@ -14,7 +14,6 @@ const LikeButton = ({ postId, initialLikeCount }: LikeButtonProps) => {
   const [likeCount, setLikeCount] = useState(initialLikeCount);
   const { user: currentUser } = useUser();
 
-  // Check if the current user has liked this post
   const hasLiked = useQuery(api.posts.hasUserLikedPost, { postId }) || false;
 
   const currentLikeCount = useQuery(api.posts.getPostLikeCount, { postId });

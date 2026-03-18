@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useScrollToTop from "../../hooks/useScrollToTop";
 import { useUser } from "../../context/UserContext";
 import { useUser as useClerkUser } from "@clerk/clerk-react";
 import { useQuery, useMutation } from "convex/react";
@@ -118,6 +119,8 @@ const ProfilePage = () => {
     navigate("/secret-messages");
   };
 
+  useScrollToTop();
+
   return (
     <div className="min-h-screen">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
@@ -125,7 +128,7 @@ const ProfilePage = () => {
           Your Profile
         </h2>
 
-        <div className="bg-gray-800 rounded-xl p-4 sm:p-8 border border-gray-700 mb-8">
+        <div className="bg-[#0d1117] rounded-2xl p-4 sm:p-10 border border-[#1e2329] mb-8 shadow-2xl">
           <div className="flex flex-col items-center">
             <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden mb-6">
               {user?.image ? (
@@ -135,7 +138,7 @@ const ProfilePage = () => {
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full bg-indigo-700 flex items-center justify-center">
+                <div className="w-full h-full bg-teal-900 flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-12 w-12 sm:h-16 sm:w-16 text-white"
@@ -161,7 +164,7 @@ const ProfilePage = () => {
                 </p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-8">
-                <div className="bg-gray-700 rounded-lg p-3 sm:p-4">
+                <div className="bg-[#161b22] rounded-xl p-4 border border-[#21262d]">
                   <div className="text-xl sm:text-2xl font-bold text-[#058fab] mb-1">
                     Member Since
                   </div>
@@ -169,7 +172,7 @@ const ProfilePage = () => {
                     {memberSince}
                   </div>
                 </div>
-                <div className="bg-gray-700 rounded-lg p-3 sm:p-4">
+                <div className="bg-[#161b22] rounded-xl p-4 border border-[#21262d]">
                   <div className="text-xl sm:text-2xl font-bold text-[#058fab] mb-1">
                     {user?.posts}
                   </div>
@@ -177,7 +180,7 @@ const ProfilePage = () => {
                     Confessions Sent
                   </div>
                 </div>
-                <div className="bg-gray-700 rounded-lg p-3 sm:p-4">
+                <div className="bg-[#161b22] rounded-xl p-4 border border-[#21262d]">
                   <div className="text-xl sm:text-2xl font-bold text-[#058fab] mb-1">
                     {secretMessagesCount}
                   </div>
@@ -190,13 +193,13 @@ const ProfilePage = () => {
               <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-6 sm:mt-8">
                 <button
                   onClick={handleShareConfessionClick}
-                  className="bg-[#226bb8] hover:bg-[#297cd5] text-white px-4 sm:px-6 py-2 sm:py-3 font-medium transition-colors rounded-md cursor-pointer whitespace-nowrap w-full sm:flex-1 sm:max-w-[45%]"
+                  className="bg-amber-700 hover:bg-amber-600 text-white px-4 sm:px-6 py-2 sm:py-3 font-medium transition-colors rounded-md cursor-pointer whitespace-nowrap w-full sm:flex-1 sm:max-w-[45%] shadow-lg transform hover:scale-105"
                 >
                   Send Confession
                 </button>
                 <button
                   onClick={handleSendSecretMessageClick}
-                  className="bg-purple-600 hover:bg-purple-700 text-white px-4 sm:px-6 py-2 sm:py-3 font-medium transition-colors rounded-md cursor-pointer whitespace-nowrap w-full sm:flex-1 sm:max-w-[45%]"
+                  className="bg-teal-700 hover:bg-teal-600 text-white px-4 sm:px-6 py-2 sm:py-3 font-medium transition-colors rounded-md cursor-pointer whitespace-nowrap w-full sm:flex-1 sm:max-w-[45%] shadow-lg transform hover:scale-105"
                 >
                   Send Secret Message
                 </button>
@@ -205,9 +208,9 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        <div className="bg-gray-800 rounded-xl p-4 sm:p-8 border border-gray-700">
+        <div className="bg-[#0f0e0c] rounded-2xl p-4 sm:p-10 border border-[#2d2416] shadow-2xl">
           <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-2">
-            <h4 className="text-lg sm:text-xl font-semibold text-gray-300">
+            <h4 className="text-lg sm:text-xl font-semibold text-amber-300">
               Your Confessions
             </h4>
             {userPosts.length > 0 && (
@@ -221,7 +224,7 @@ const ProfilePage = () => {
           </div>
 
           {userPosts.length === 0 ? (
-            <p className="text-gray-400 text-center italic">
+            <p className="text-amber-300/60 text-center italic">
               You haven't posted any confessions yet.
             </p>
           ) : (
@@ -229,10 +232,10 @@ const ProfilePage = () => {
               {visibleConfessions.map((post) => (
                 <div
                   key={post._id}
-                  className="break-words break-all whitespace-pre-wrap bg-gray-800 rounded-lg p-4 border border-gray-500 relative min-h-[120px] flex flex-col"
+                  className="break-words break-all whitespace-pre-wrap bg-[#1a1611] rounded-xl p-6 border border-[#3e2b14] hover:border-amber-700/70 transition-all relative min-h-[140px] flex flex-col shadow-lg shadow-black/40"
                 >
                   {post.text && (
-                    <p className="text-gray-300 mb-3 break-words whitespace-pre-wrap text-sm sm:text-base">
+                    <p className="text-stone-200 mb-3 break-words whitespace-pre-wrap text-sm sm:text-base">
                       {post.text}
                     </p>
                   )}
@@ -247,7 +250,7 @@ const ProfilePage = () => {
                     </div>
                   )}
 
-                  <div className="mt-auto pt-3 flex items-center justify-between border-t border-[#2c3e50]">
+                  <div className="mt-auto pt-3 flex items-center justify-between border-t border-amber-900/40">
                     <div className="flex items-center gap-2 sm:gap-4">
                       <LikeButton
                         postId={post._id}
@@ -294,7 +297,7 @@ const ProfilePage = () => {
                   </div>
 
                   {commentSectionStates[post._id] && (
-                    <div className="mt-4 pt-2 border-t border-[#2c3e50]">
+                    <div className="mt-4 pt-2 border-t border-amber-900/40">
                       <CommentSection
                         postId={post._id}
                         showCommentsProp={true}
@@ -315,7 +318,7 @@ const ProfilePage = () => {
             <div className="mt-4 text-center">
               <button
                 onClick={toggleShowAllConfessions}
-                className="px-4 py-2 bg-[#00c3ff] text-white rounded-md hover:bg-[#36c7f3] transition text-sm sm:text-base"
+                className="px-4 py-2 bg-amber-700 text-white rounded-md hover:bg-amber-600 transition text-sm sm:text-base shadow-md hover:scale-105 transform"
               >
                 {showAllConfessions
                   ? "Show Less"

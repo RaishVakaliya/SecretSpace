@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
+import useScrollToTop from "../hooks/useScrollToTop";
 import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { RiCloseLargeFill } from "react-icons/ri";
@@ -15,7 +16,6 @@ const ReportIssuesPage = () => {
   const [file, setFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Use Convex mutations
   const generateUploadUrl = useMutation(api.report_issue.generateUploadUrl);
   const submitIssueReport = useMutation(api.report_issue.submitIssueReport);
 
@@ -30,9 +30,7 @@ const ReportIssuesPage = () => {
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+  useScrollToTop();
 
   const selectOption = (value: string) => {
     setIssueType(value);
@@ -46,7 +44,6 @@ const ReportIssuesPage = () => {
   };
 
   const handleImageButtonClick = () => {
-    // Trigger the hidden file input
     fileInputRef.current?.click();
   };
 
@@ -64,12 +61,9 @@ const ReportIssuesPage = () => {
     try {
       let storageId = undefined;
 
-      // Upload file if provided
       if (file) {
-        // Get upload URL
         const uploadUrl = await generateUploadUrl();
 
-        // Upload the file
         const result = await fetch(uploadUrl, {
           method: "POST",
           headers: { "Content-Type": file.type },
@@ -80,12 +74,10 @@ const ReportIssuesPage = () => {
           throw new Error("Failed to upload screenshot");
         }
 
-        // Get the storage ID from the upload response
         const data = await result.json();
         storageId = data.storageId;
       }
 
-      // Submit to Convex database
       await submitIssueReport({
         issueType,
         description,
@@ -93,7 +85,6 @@ const ReportIssuesPage = () => {
         storageId,
       });
 
-      // Reset form and show success message
       setDescription("");
       setEmail("");
       setFile(null);
@@ -145,7 +136,7 @@ const ReportIssuesPage = () => {
                     <span>
                       {
                         issueOptions.find(
-                          (option) => option.value === issueType
+                          (option) => option.value === issueType,
                         )?.label
                       }
                     </span>
@@ -213,7 +204,6 @@ const ReportIssuesPage = () => {
                 </div>
               </div>
 
-              {/* Optional file upload with improved UI */}
               <div>
                 <div className="flex items-center justify-between">
                   <label className="block text-indigo-300 mb-2 font-medium">
@@ -221,7 +211,6 @@ const ReportIssuesPage = () => {
                   </label>
                 </div>
 
-                {/* Hidden file input */}
                 <input
                   ref={fileInputRef}
                   type="file"

@@ -115,8 +115,8 @@ const CreateConfession = () => {
   }, [success]);
 
   return (
-    <div className="w-full max-w-4xl mx-auto bg-gradient-to-br from-gray-900 to-indigo-900 rounded-lg shadow-xl p-6 border border-indigo-700 mb-8">
-      <h3 className="text-xl font-semibold mb-4 text-indigo-300">
+    <div className="w-full max-w-4xl mx-auto bg-gradient-to-br from-gray-900 to-stone-800 rounded-lg shadow-xl p-6 border border-amber-800 mb-8">
+      <h3 className="text-xl font-semibold mb-4 text-amber-300">
         Share Your Confession
       </h3>
 
@@ -141,7 +141,7 @@ const CreateConfession = () => {
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <textarea
-            className="w-full p-4 bg-gray-800 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:outline-none border border-indigo-800 shadow-inner"
+            className="w-full p-4 bg-gray-800 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-amber-500 focus:outline-none border border-stone-600 shadow-inner"
             rows={4}
             placeholder="Share your confession anonymously..."
             value={text}
@@ -158,7 +158,7 @@ const CreateConfession = () => {
 
         <div className="mb-4">
           <div className="flex items-center justify-between">
-            <label className="block text-indigo-300 mb-2">
+            <label className="block text-amber-300 mb-2">
               Add an Image (Optional)
             </label>
             {previewUrl && (
@@ -189,14 +189,14 @@ const CreateConfession = () => {
               <img
                 src={previewUrl}
                 alt="Preview"
-                className="max-h-64 rounded-md mx-auto border border-indigo-700"
+                className="max-h-64 rounded-md mx-auto border border-amber-700"
               />
             </div>
           ) : (
             <button
               type="button"
               onClick={handleImageButtonClick}
-              className="w-full p-3 bg-gray-800 rounded-lg text-indigo-300 border border-indigo-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center justify-center"
+              className="w-full p-3 bg-gray-800 rounded-lg text-amber-300 border border-stone-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-500 flex items-center justify-center"
               disabled={isSubmitting}
             >
               <svg
@@ -221,7 +221,7 @@ const CreateConfession = () => {
         <div className="flex justify-end">
           <button
             type="submit"
-            className="bg-indigo-600 hover:bg-indigo-700  w-full sm:w-auto text-white font-medium py-2 px-6 rounded-md transition-colors shadow-lg transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-amber-700 hover:bg-amber-600 w-full sm:w-auto text-white font-medium py-2 px-6 rounded-md transition-colors shadow-lg transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={isSubmitting || (!text && !image)}
           >
             {isSubmitting ? "Posting..." : "Post Anonymously"}

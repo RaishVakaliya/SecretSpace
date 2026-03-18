@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import useScrollToTop from "../hooks/useScrollToTop";
 import {
   Shield,
   MessageCircle,
@@ -13,14 +14,12 @@ import CommonFooter from "../common/CommonFooter";
 import { useNavigate } from "react-router-dom";
 
 export default function CommunityGuidelinesPage() {
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+  useScrollToTop();
 
   const navigate = useNavigate();
 
   const [expandedSections, setExpandedSections] = useState(
-    new Set(["overview"])
+    new Set(["overview"]),
   );
 
   const toggleSection = (sectionId: string) => {
@@ -276,7 +275,6 @@ export default function CommunityGuidelinesPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
       <section className="pt-12 pb-8 px-6">
         <div className="max-w-4xl mx-auto">
           <div
@@ -317,7 +315,6 @@ export default function CommunityGuidelinesPage() {
         </div>
       </section>
 
-      {/* Guidelines Content */}
       <section className="pb-16 px-6">
         <div className="max-w-4xl mx-auto space-y-6">
           {guidelines.map((section) => (
@@ -356,7 +353,6 @@ export default function CommunityGuidelinesPage() {
         </div>
       </section>
 
-      {/* Footer CTA */}
       <section className="pb-16 px-6">
         <div className="max-w-4xl mx-auto">
           <div className="bg-gradient-to-r from-purple-600/10 to-blue-600/10 border border-purple-500/20 rounded-2xl p-8 text-center">
@@ -386,7 +382,6 @@ export default function CommunityGuidelinesPage() {
         </div>
       </section>
 
-      {/* Remove animations for reduced motion */}
       <style>{`
         @media (prefers-reduced-motion: reduce) {
           * {

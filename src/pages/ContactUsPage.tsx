@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAction } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { MdOutlineEmail } from "react-icons/md";
@@ -6,6 +6,7 @@ import { PiMapPin } from "react-icons/pi";
 import { FiPhone } from "react-icons/fi";
 import { LuSend } from "react-icons/lu";
 import CommonFooter from "../common/CommonFooter";
+import useScrollToTop from "../hooks/useScrollToTop";
 
 const ContactUsPage = () => {
   const [name, setName] = useState("");
@@ -43,9 +44,7 @@ const ContactUsPage = () => {
       setIsSubmitting(false);
     }
   };
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+  useScrollToTop();
 
   return (
     <div className="min-h-screen">

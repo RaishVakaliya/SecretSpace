@@ -115,7 +115,7 @@ const AuthenticatedContent = () => {
         </p>
       </div>
 
-      <div className="bg-gradient-to-br from-gray-900 to-purple-900 rounded-lg shadow-xl p-6 border border-purple-700">
+      <div className="bg-gradient-to-br from-gray-900 to-slate-800 rounded-lg shadow-xl p-6 border border-teal-800">
         <div>
           <h3 className="text-xl font-semibold mb-4 text-[#acb3bc]">
             Create Secret Message
@@ -136,7 +136,7 @@ const AuthenticatedContent = () => {
           <form onSubmit={handleSubmit}>
             <div className="mb-6">
               <textarea
-                className="w-full p-4 bg-gray-800 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:outline-none border border-purple-800 shadow-inner"
+                className="w-full p-4 bg-gray-800 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-teal-500 focus:outline-none border border-slate-600 shadow-inner"
                 rows={4}
                 placeholder="Type your secret message here..."
                 value={message}
@@ -149,7 +149,7 @@ const AuthenticatedContent = () => {
                   Message expires after:
                 </label>
                 <select
-                  className="bg-gray-800 text-white rounded-md px-3 py-2 w-full border border-purple-800 focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                  className="bg-gray-800 text-white rounded-md px-3 py-2 w-full border border-slate-600 focus:ring-2 focus:ring-teal-500 focus:outline-none"
                   value={expirationHours}
                   onChange={(e) => setExpirationHours(parseInt(e.target.value))}
                   disabled={isSubmitting}
@@ -171,7 +171,7 @@ const AuthenticatedContent = () => {
                 <div className="relative">
                   <input
                     type="text"
-                    className="w-full p-3 bg-gray-800 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:outline-none border border-purple-800 shadow-inner"
+                    className="w-full p-3 bg-gray-800 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-teal-500 focus:outline-none border border-slate-600 shadow-inner"
                     placeholder="Search by email..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
@@ -182,7 +182,7 @@ const AuthenticatedContent = () => {
                     !recipientEmail && (
                       <div
                         ref={searchResultsRef}
-                        className="absolute z-10 mt-1 w-full bg-gray-800 border border-purple-700 rounded-md shadow-lg max-h-60 overflow-auto"
+                        className="absolute z-10 mt-1 w-full bg-gray-800 border border-teal-700 rounded-md shadow-lg max-h-60 overflow-auto"
                       >
                         {searchUsers.map((user) => (
                           <div
@@ -236,7 +236,7 @@ const AuthenticatedContent = () => {
               <div className="mt-6 flex justify-end">
                 <button
                   type="submit"
-                  className="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-6 rounded-md transition-colors shadow-lg transform sm:hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full sm:w-auto bg-teal-700 hover:bg-teal-600 text-white font-medium py-2 px-6 rounded-md transition-colors shadow-lg transform sm:hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
                   disabled={
                     isSubmitting ||
                     (!recipientEmail && !isValidEmail(searchQuery.trim())) ||

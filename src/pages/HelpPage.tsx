@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import useScrollToTop from "../hooks/useScrollToTop";
 import CommonFooter from "../common/CommonFooter";
 import FAQPage from "./FAQPage";
 import { FaRocket } from "react-icons/fa";
@@ -10,9 +10,7 @@ const HelpPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+  useScrollToTop();
 
   if (location.pathname === "/contact") return null;
   return (
@@ -25,7 +23,6 @@ const HelpPage = () => {
           </p>
         </div>
 
-        {/* Help Categories */}
         <div className="grid md:grid-cols-2 gap-8 mb-12">
           <div
             className="bg-gray-800 rounded-xl p-6 border border-gray-700 hover:border-[#6486ab] transition-all cursor-pointer"
@@ -95,7 +92,6 @@ const HelpPage = () => {
 
         <FAQPage />
 
-        {/* Contact Support */}
         <div className="mt-12 text-center">
           <h2 className="text-2xl font-bold text-white mb-4">
             Still Need Help?

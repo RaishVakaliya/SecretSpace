@@ -11,12 +11,10 @@ import {
 import { HeroSection } from "./HeroSection";
 import { Footer } from "./Footer";
 import CommonFooter from "../../common/CommonFooter";
-import { useEffect } from "react";
+import useScrollToTop from "../../hooks/useScrollToTop";
 
 const FeaturesPage = () => {
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+  useScrollToTop();
 
   const features = [
     {

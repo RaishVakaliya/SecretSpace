@@ -1,15 +1,13 @@
 import { FaClock, FaHeart, FaShieldAlt } from "react-icons/fa";
 import HomeFooter from "./HomeFooter";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import useScrollToTop from "../hooks/useScrollToTop";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 const HomePage = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+  useScrollToTop();
   return (
     <>
       <div className="min-h-screen ">

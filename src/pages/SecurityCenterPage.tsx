@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import useScrollToTop from "../hooks/useScrollToTop";
 import {
   Shield,
   Lock,
@@ -12,16 +12,12 @@ import CommonFooter from "../common/CommonFooter";
 import { SiSpringsecurity } from "react-icons/si";
 
 const SecurityCenterPage = () => {
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+  useScrollToTop();
 
   return (
     <div className="relative min-h-screen">
-      {/* Subtle Purple Background Glow */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-[#a678f1] opacity-10 blur-3xl rounded-full z-0" />
 
-      {/* Header Section */}
       <div
         className="relative -top-4 overflow-hidden mt-0 pt-0"
         style={{
@@ -54,7 +50,6 @@ const SecurityCenterPage = () => {
       </div>
 
       <div className="max-w-4xl mx-auto px-6 py-8 relative z-10">
-        {/* Security Status Card */}
         <section className="mb-12 bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50">
           <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
             <Shield className="text-purple-400" />
@@ -96,7 +91,6 @@ const SecurityCenterPage = () => {
           </div>
         </section>
 
-        {/* Security Features */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold text-white mb-6">
             Security Features
@@ -158,7 +152,6 @@ const SecurityCenterPage = () => {
           </div>
         </section>
 
-        {/* Security Tips */}
         <section className="mb-12 bg-gray-800/30 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50">
           <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
             <AlertTriangle className="text-yellow-400" />

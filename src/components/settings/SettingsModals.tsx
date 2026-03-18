@@ -44,7 +44,6 @@ const SettingsModals: React.FC<Props> = ({
 }) => {
   return (
     <>
-      {/* Account Deletion Confirmation Modal */}
       {showDeleteConfirmation && (
         <div className="fixed inset-0 bg-black bg-opacity-20 flex items-center justify-center z-50">
           <div className="modalbg p-6 rounded-lg shadow-xl max-w-md w-full border modalBorder">
@@ -81,7 +80,6 @@ const SettingsModals: React.FC<Props> = ({
         </div>
       )}
 
-      {/* Logout Confirmation Modal */}
       {showLogoutConfirmation && (
         <div className="fixed inset-0 bg-black bg-opacity-20 flex items-center justify-center z-50">
           <div className="modalbg p-6 rounded-lg shadow-xl max-w-md w-full border modalBorder">
@@ -108,7 +106,6 @@ const SettingsModals: React.FC<Props> = ({
         </div>
       )}
 
-      {/* Edit Profile Modal */}
       {isEditing && (
         <div className="fixed inset-0 bg-black bg-opacity-20 flex items-center justify-center z-50">
           <div className="modalbg p-6 rounded-lg shadow-xl max-w-md w-full border modalBorder">
