@@ -15,6 +15,7 @@ import {
   FaUserSecret,
   FaTimes,
 } from "react-icons/fa";
+import useScrollToTop from "../hooks/useScrollToTop";
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();
@@ -25,9 +26,10 @@ const LandingPage: React.FC = () => {
     weekday: "long",
   });
 
+  useScrollToTop();
+
   const LandingPage = () => (
     <div className="min-h-screen bg-black">
-      {/* Landing Navigation */}
       <nav className="fixed top-0 left-0 right-0 bg-black bg-opacity-90 backdrop-blur-sm z-50 border-b border-gray-800">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between h-16">
@@ -85,7 +87,6 @@ const LandingPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Mobile Navigation Menu */}
           {showMobileMenu && (
             <div className="md:hidden border-t border-gray-700">
               <div className="py-4 space-y-3">
@@ -131,7 +132,6 @@ const LandingPage: React.FC = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
       <section
         className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 sm:pt-0"
         style={{
@@ -193,7 +193,6 @@ const LandingPage: React.FC = () => {
             </button>
           </div>
 
-          {/* Floating Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="bg-white bg-opacity-5 backdrop-blur-sm rounded-xl p-6 border border-[#058fab] border-opacity-30">
               <div className="text-3xl font-bold text-[#058fab] mb-2">10K+</div>
@@ -217,7 +216,6 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Features Section */}
       <section
         id="features"
         className="py-24 bg-gradient-to-b from-black to-gray-900"
@@ -286,7 +284,6 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* About Section */}
       <section
         id="about"
         className="py-24 bg-gradient-to-b from-gray-900 to-black"
@@ -358,7 +355,6 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-24 bg-gradient-to-r from-[#e3469aa1] via-[#42f5ce77] to-[#9fab1b90]">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
@@ -396,7 +392,6 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="bg-black py-12 border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8">
@@ -508,11 +503,9 @@ const LandingPage: React.FC = () => {
         </div>
       </footer>
 
-      {/* Modal Video Popup */}
       {showVideo && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80">
           <div className="relative bg-white rounded-lg shadow-lg p-4 max-w-4xl w-full">
-            {/* Close Button */}
             <button
               onClick={() => setShowVideo(false)}
               className="absolute top-0 right-0 hover:cursor-pointer bg-gray-500 hover:bg-gray-600 text-gray-800 hover:text-black rounded-full w-6 h-6 flex items-center justify-center text-xl font-bold transition"
@@ -520,7 +513,6 @@ const LandingPage: React.FC = () => {
               ×
             </button>
 
-            {/* Video Player */}
             <video controls autoPlay className="w-full h-auto rounded-md">
               <source
                 src="https://res.cloudinary.com/dzwwok8fj/video/upload/v1754466916/demo_g6rvyj.mp4"
